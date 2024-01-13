@@ -127,3 +127,18 @@ func emit_drag_signal():
 func place():
 	emit_place_signal()
 	position = original_position
+
+func randomize(source_tilemaps):
+	clear()
+	# select random element from source_tilemaps array
+	var source_tilemap = source_tilemaps[randi() % source_tilemaps.size()]
+	# copy tile data from source_tilemap to this tilemap
+	for cell in source_tilemap.get_used_cells():
+			var cell_x = cell.x
+			var cell_y = cell.y
+			var tile_id = source_tilemap.get_cell(cell_x, cell_y)
+			if tile_id == -1:
+				continue
+			# Random between 0 and 3
+			var new_tile_id = randi() % 4
+			set_cell(cell_x, cell_y, new_tile_id)

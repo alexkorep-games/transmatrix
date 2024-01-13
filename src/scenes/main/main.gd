@@ -4,12 +4,16 @@ var field_size = Vector2(8, 8)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	randomize_shape()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
+func randomize_shape():
+	var current_shape = get_node("%CurrentShape")
+	var possible_shapes = get_node("%Shapes").get_children()
+	current_shape.randomize(possible_shapes)
 
 func _on_CurrentShape_drag(positions, tile_ids):
 	var field = get_node("%FieldTileMap")
@@ -52,6 +56,7 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	field.remove_groups()
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
+	randomize_shape()
 
 
 func _on_CurrentShape_drag_release():

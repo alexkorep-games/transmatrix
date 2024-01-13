@@ -119,6 +119,7 @@ size_flags_vertical = 3
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 
 [node name="Shapes" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="I" type="TileMap" parent="Shapes"]
 visible = false
