@@ -4,6 +4,7 @@ func _ready():
 	pass
 
 func remove_groups():
+	var result = []
 	var checked = []
 	var r = get_used_rect()
 	for x in range(r.position.x, r.position.x + r.size.x):
@@ -21,7 +22,12 @@ func remove_groups():
 			if group.size() >= 4:
 				for cell_pos in group:
 					set_cellv(cell_pos, -1)  # -1 clears the cell
+					result.append({
+						"pos": cell_pos,
+						"tile_id": tile_id
+					})
 			checked += group
+	return result
 
 func get_similar_group(pos, tile_id, group = []):
 	if not is_valid_cell(pos) or pos in group or get_cellv(pos) != tile_id:

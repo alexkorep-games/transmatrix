@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/grid/grid01.png" type="Texture" id=3]
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=4]
 [ext_resource path="res://scenes/main/field_tile_map.gd" type="Script" id=5]
+[ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -77,6 +78,20 @@
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+5/name = "grid01.png 5"
+5/texture = ExtResource( 3 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 640, 0, 128, 128 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -87,13 +102,32 @@ script = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
+
 [node name="Field" type="Control" parent="VBoxContainer"]
+margin_top = 20.0
 margin_right = 360.0
-margin_bottom = 358.0
+margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FieldTileMap" type="TileMap" parent="VBoxContainer/Field"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.137255, 0.313726, 0.423529, 1 )
+
+[node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
+position = Vector2( 17, 9 )
+
+[node name="BackgroundTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
+scale = Vector2( 0.32, 0.32 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 65536, 5, 0, 65537, 5, 0, 65538, 5, 0, 65539, 5, 0, 65540, 5, 0, 65541, 5, 0, 65542, 5, 0, 65543, 5, 0, 131072, 5, 0, 131073, 5, 0, 131074, 5, 0, 131075, 5, 0, 131076, 5, 0, 131077, 5, 0, 131078, 5, 0, 131079, 5, 0, 196608, 5, 0, 196609, 5, 0, 196610, 5, 0, 196611, 5, 0, 196612, 5, 0, 196613, 5, 0, 196614, 5, 0, 196615, 5, 0, 262144, 5, 0, 262145, 5, 0, 262146, 5, 0, 262147, 5, 0, 262148, 5, 0, 262149, 5, 0, 262150, 5, 0, 262151, 5, 0, 327680, 5, 0, 327681, 5, 0, 327682, 5, 0, 327683, 5, 0, 327684, 5, 0, 327685, 5, 0, 327686, 5, 0, 327687, 5, 0, 393216, 5, 0, 393217, 5, 0, 393218, 5, 0, 393219, 5, 0, 393220, 5, 0, 393221, 5, 0, 393222, 5, 0, 393223, 5, 0, 458752, 5, 0, 458753, 5, 0, 458754, 5, 0, 458755, 5, 0, 458756, 5, 0, 458757, 5, 0, 458758, 5, 0, 458759, 5, 0 )
+script = ExtResource( 5 )
+
+[node name="FieldTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
 scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
@@ -101,20 +135,25 @@ cell_size = Vector2( 128, 128 )
 format = 1
 script = ExtResource( 5 )
 
-[node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field"]
+[node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.466667 )
+modulate = Color( 1, 1, 1, 0.498039 )
 scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
 [node name="ShapesSource" type="Control" parent="VBoxContainer"]
-margin_top = 362.0
+margin_top = 372.0
 margin_right = 360.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ShapesSource"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.333333, 0.670588, 0.831373, 1 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 

@@ -21,6 +21,7 @@ func _on_CurrentShape_drag(positions, tile_ids):
 	# Remove all cells with num 4
 	preview_field.clear()
 	var can_be_placed = true
+	var shape_covers_preview = false
 
 	for i in range(len(positions)):
 		var pos = positions[i]
@@ -32,6 +33,8 @@ func _on_CurrentShape_drag(positions, tile_ids):
 		if cell_pos.x < 0 or cell_pos.x >= field_size.x or cell_pos.y < 0 or cell_pos.y >= field_size.y:
 			can_be_placed = false
 			continue
+		shape_covers_preview = true
+		preview_field.set_cellv(cell_pos, tile_id)
 
 		var field_tile = field.get_cellv(cell_pos)
 		# Check if field_tile == -1, to find out if the shape can be placed
@@ -39,9 +42,9 @@ func _on_CurrentShape_drag(positions, tile_ids):
 			# The field cell is already occupied
 			can_be_placed = false
 			continue
-		preview_field.set_cellv(cell_pos, tile_id)
 
 	get_node("%CurrentShape").can_be_placed = can_be_placed
+	get_node("%CurrentShape").visible = not shape_covers_preview
 
 
 func _on_CurrentShape_place(block_positions, tile_ids):
@@ -53,12 +56,17 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		var local_pos = field.to_local(pos)
 		var cell_pos = field.world_to_map(local_pos)
 		field.set_cellv(cell_pos, tile_id)
-	field.remove_groups()
+	var removed_blocks = field.remove_groups()
+	var score = len(removed_blocks)
+	GameState.increase_score(score)
+	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
 	randomize_shape()
+	get_node("%CurrentShape").visible = true
 
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
+	get_node("%CurrentShape").visible = true
