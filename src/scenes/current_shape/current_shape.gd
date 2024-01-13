@@ -1,5 +1,7 @@
 extends TileMap
 
+signal drag(block_positions, tile_ids)
+
 var mouse_down = false
 var dragging = false
 var drag_start = Vector2()
@@ -41,6 +43,8 @@ func _process(delta):
 		var drag_current = get_global_mouse_position()
 		var drag_delta = drag_current - drag_start
 		position = original_position + drag_delta
+
+		emit_drag_signal()
 
 func go_back():
 	# Use tween to animate the tilemap back to the original position
@@ -85,3 +89,14 @@ func rotate_tilemap_90_degrees_clockwise(tilemap: TileMap):
 			var new_pos = Vector2(max_y - old_pos.y, old_pos.x)
 			tilemap.set_cellv(new_pos, tile["id"])
 
+
+func emit_drag_signal():
+	var block_positions = []
+	var tile_ids = []
+	for cell in get_used_cells():
+		var cell_position = map_to_world(cell)
+		var global_cell_position = to_global(cell_position)
+		block_positions.append(global_cell_position)
+		var cell_id = get_cellv(cell)
+		tile_ids.append(cell_id)
+	emit_signal("drag", block_positions, tile_ids)

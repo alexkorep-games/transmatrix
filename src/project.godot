@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Transmatrix Decoder"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/main/main.tscn"
 config/icon="res://icon.png"
 
 [display]
