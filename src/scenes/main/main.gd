@@ -29,10 +29,9 @@ func _on_CurrentShape_drag(positions, tile_ids):
 		# check if cell_pos is between (0,0) and field_size
 		if cell_pos.x < 0 or cell_pos.x >= field_size.x or cell_pos.y < 0 or cell_pos.y >= field_size.y:
 			can_be_placed = false
-			print(cell_pos)
 			continue
 
-		var field_tile = field.get_cellv(pos)
+		var field_tile = field.get_cellv(cell_pos)
 		# Check if field_tile == -1, to find out if the shape can be placed
 		if field_tile != -1:
 			# The field cell is already occupied
