@@ -168,3 +168,5 @@ format = 1
 tile_data = PoolIntArray( -65535, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0 )
 
 [connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
+[connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
+[connection signal="place" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_place"]

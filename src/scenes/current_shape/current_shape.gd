@@ -1,6 +1,8 @@
 extends TileMap
 
 signal drag(block_positions, tile_ids)
+signal place(block_positions, tile_ids)
+signal drag_release()
 
 var mouse_down = false
 var dragging = false
@@ -12,6 +14,9 @@ var is_rotating = false
 var tween = Tween.new()
 
 var DRAG_DISTANCE_THRESHOLD = 10
+
+# Flag indicating if this shape can be placed on the grid
+export var can_be_placed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,7 +35,10 @@ func _process(delta):
 			mouse_down = false
 			if dragging:
 				dragging = false
-				go_back()
+				if can_be_placed:
+					place()
+				else:
+					go_back()
 			else:
 				# Rotate the TileMap by 90 degrees
 				rotate_me()
@@ -51,6 +59,7 @@ func go_back():
 	# that means that position property should be animated to original_position value
 	tween.interpolate_property(self, "position", position, original_position, 0.2, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 	tween.start()
+	emit_signal("drag_release")
 
 func rotate_me():
 	if is_rotating:
@@ -90,13 +99,31 @@ func rotate_tilemap_90_degrees_clockwise(tilemap: TileMap):
 			tilemap.set_cellv(new_pos, tile["id"])
 
 
-func emit_drag_signal():
+func get_block_positions():
 	var block_positions = []
-	var tile_ids = []
 	for cell in get_used_cells():
 		var cell_position = map_to_world(cell)
 		var global_cell_position = to_global(cell_position)
 		block_positions.append(global_cell_position)
+	return block_positions
+
+func get_tile_ids():
+	var tile_ids = []
+	for cell in get_used_cells():
 		var cell_id = get_cellv(cell)
 		tile_ids.append(cell_id)
+	return tile_ids
+
+func emit_place_signal():
+	var block_positions = get_block_positions()
+	var tile_ids = get_tile_ids()
+	emit_signal("place", block_positions, tile_ids)
+
+func emit_drag_signal():
+	var block_positions = get_block_positions()
+	var tile_ids = get_tile_ids()
 	emit_signal("drag", block_positions, tile_ids)
+
+func place():
+	emit_place_signal()
+	position = original_position
