@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/grid/grid01.png" type="Texture" id=3]
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=4]
+[ext_resource path="res://scenes/main/field_tile_map.gd" type="Script" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -98,6 +99,7 @@ scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
+script = ExtResource( 5 )
 
 [node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field"]
 unique_name_in_owner = true

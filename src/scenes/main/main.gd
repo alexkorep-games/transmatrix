@@ -2,11 +2,9 @@ extends Control
 
 var field_size = Vector2(8, 8)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -51,6 +49,9 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		var local_pos = field.to_local(pos)
 		var cell_pos = field.world_to_map(local_pos)
 		field.set_cellv(cell_pos, tile_id)
+	field.remove_groups()
+	var preview_field = get_node("%PreviewTileMap")
+	preview_field.clear()
 
 
 func _on_CurrentShape_drag_release():
