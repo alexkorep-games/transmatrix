@@ -27,8 +27,13 @@ func _ready():
 func _process(delta):
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		if not mouse_down:
+			# Check if the mouse is over the parent Control node of the TileMap
+			var mouse_position = get_global_mouse_position()
+			var mouse_over_parent = get_parent().get_rect().has_point(mouse_position)
+			if not mouse_over_parent:
+				return
 			mouse_down = true
-			drag_start = get_global_mouse_position()
+			drag_start = mouse_position
 			original_position = position
 	else:
 		if mouse_down:

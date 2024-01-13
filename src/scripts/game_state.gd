@@ -10,3 +10,6 @@ func increase_score(val):
 
 func get_score():
 	return score
+
+func reset_score():
+	score = 0

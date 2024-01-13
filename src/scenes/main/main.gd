@@ -10,6 +10,12 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func new_game():
+	var field = get_node("%FieldTileMap")
+	field.clear()
+	GameState.reset_score()
+	randomize_shape()
+
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
 	var possible_shapes = get_node("%Shapes").get_children()
@@ -70,3 +76,13 @@ func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
 	get_node("%CurrentShape").visible = true
+
+
+func _on_HUD_settings_pressed():
+	get_node("%SettingsDialog").show()
+
+func _on_StartNewGameConfirmationDialog_confirmed():
+	new_game()
+
+func _on_SettingsDialog_new_game():
+	get_node("%StartNewGameConfirmationDialog").show()

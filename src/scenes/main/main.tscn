@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=4]
 [ext_resource path="res://scenes/main/field_tile_map.gd" type="Script" id=5]
 [ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/settings_dialog/settings_dialog.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -103,11 +104,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
+margin_bottom = 40.0
 
 [node name="Field" type="Control" parent="VBoxContainer"]
-margin_top = 20.0
+margin_top = 44.0
 margin_right = 360.0
-margin_bottom = 368.0
+margin_bottom = 404.0
+rect_min_size = Vector2( 0, 360 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -117,7 +120,7 @@ anchor_bottom = 1.0
 color = Color( 0.137255, 0.313726, 0.423529, 1 )
 
 [node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
-position = Vector2( 17, 9 )
+position = Vector2( 16, 16 )
 
 [node name="BackgroundTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 scale = Vector2( 0.32, 0.32 )
@@ -144,7 +147,7 @@ cell_size = Vector2( 128, 128 )
 format = 1
 
 [node name="ShapesSource" type="Control" parent="VBoxContainer"]
-margin_top = 372.0
+margin_top = 408.0
 margin_right = 360.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -156,6 +159,7 @@ anchor_bottom = 1.0
 color = Color( 0.333333, 0.670588, 0.831373, 1 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
+position = Vector2( 180, 90 )
 
 [node name="Shapes" type="Node" parent="."]
 unique_name_in_owner = true
@@ -209,6 +213,26 @@ cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -65535, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0 )
 
+[node name="StartNewGameConfirmationDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -70.0
+margin_right = 150.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 300, 140 )
+window_title = "Start a new game?"
+dialog_text = "Do you want to start a new game?"
+
+[node name="SettingsDialog" parent="." instance=ExtResource( 7 )]
+unique_name_in_owner = true
+
+[connection signal="settings_pressed" from="VBoxContainer/HUD" to="." method="_on_HUD_settings_pressed"]
 [connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
 [connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
 [connection signal="place" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_place"]
+[connection signal="confirmed" from="StartNewGameConfirmationDialog" to="." method="_on_StartNewGameConfirmationDialog_confirmed"]
+[connection signal="new_game" from="SettingsDialog" to="." method="_on_SettingsDialog_new_game"]
