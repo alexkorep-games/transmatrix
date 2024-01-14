@@ -19,3 +19,8 @@ func _on_NewGameButton_pressed():
 
 func _on_CloseButton_pressed():
 	hide()
+
+
+func _on_MainScreenButton_pressed():
+	hide()
+	get_tree().change_scene("res://scenes/start_screen/start_screen.tscn")

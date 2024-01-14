@@ -7,7 +7,7 @@ func _ready():
 	randomize_shape()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
-	GameState.load_game(field, current_shape)
+	GameState.load_game_free_play(field, current_shape)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -78,7 +78,7 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	randomize_shape()
 	var current_shape = get_node("%CurrentShape")
 	current_shape.visible = true
-	GameState.save_game(field, current_shape)
+	GameState.save_game_free_play(field, current_shape)
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=2]
+
+[ext_resource path="res://assets/ui/buttons01.png" type="Texture" id=1]
+
+[resource]
+texture = ExtResource( 1 )
+region_rect = Rect2( 852.578, 814.613, 133.478, 82.6583 )
+margin_left = 39.1862
+margin_right = 33.9818
+margin_top = 27.5528
+margin_bottom = 34.9002
