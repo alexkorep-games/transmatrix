@@ -65,8 +65,10 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		var cell_pos = field.world_to_map(local_pos)
 		field.set_cellv(cell_pos, tile_id)
 	var removed_blocks = field.remove_groups()
-	var score = len(removed_blocks)
-	GameState.increase_score(score)
+	if len(removed_blocks) > 0:
+		do_block_removal_animation(removed_blocks)
+		var score = len(removed_blocks)
+		GameState.increase_score(score)
 	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
@@ -83,6 +85,16 @@ func shape_can_be_placed_anywhere(current_shape_tilemap):
 	var shape_blocks = current_shape_tilemap.get_used_cells()
 	return EndGameChecker.has_more_moves(field, shape_blocks, field_size.x, field_size.y)
 
+func do_block_removal_animation(removed_blocks):
+	var field = get_node("%ClearingShapesFieldTileMap")
+	field.clear()
+	for block in removed_blocks:
+		var pos = block["pos"]
+		var tile_id = block["tile_id"]
+		field.set_cellv(pos, tile_id)
+	var animation_player = get_node("%ClearingShapesAnimationPlayer")
+	animation_player.play("blink")
+	
 
 func _on_HUD_settings_pressed():
 	get_node("%SettingsDialog").show()

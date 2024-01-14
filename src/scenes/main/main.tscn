@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
@@ -94,6 +94,22 @@
 5/shapes = [  ]
 5/z_index = 0
 
+[sub_resource type="Animation" id=2]
+resource_name = "blink"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/Field/TileMaps/ClearingShapesFieldTileMap:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false ]
+}
+
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -137,6 +153,21 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 script = ExtResource( 5 )
+
+[node name="ClearingShapesFieldTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2( 0.32, 0.32 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 196612, 0, 0, 262147, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="ClearingShapesAnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/Field/TileMaps/ClearingShapesFieldTileMap"]
+unique_name_in_owner = true
+root_node = NodePath("../../../../..")
+anims/blink = SubResource( 2 )
 
 [node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
