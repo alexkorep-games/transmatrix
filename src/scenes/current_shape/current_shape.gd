@@ -113,10 +113,11 @@ func rotate_tilemap_90_degrees_clockwise():
 
 func get_block_positions():
 	var block_positions = []
+	var tile_size = tilemap.cell_size * tilemap.scale
 	for cell in tilemap.get_used_cells():
 		var cell_position = tilemap.map_to_world(cell)
 		var global_cell_position = tilemap.to_global(cell_position)
-		block_positions.append(global_cell_position)
+		block_positions.append(global_cell_position + tile_size/2)
 	return block_positions
 
 func get_tile_ids():

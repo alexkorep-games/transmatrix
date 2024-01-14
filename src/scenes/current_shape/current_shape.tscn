@@ -14,9 +14,3 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0 )
-
-[node name="Panel" type="ColorRect" parent="."]
-margin_left = -6.0
-margin_top = -6.0
-margin_right = 5.0
-margin_bottom = 6.0

@@ -28,7 +28,6 @@ func randomize_shape():
 		get_node("%GameOverDialog").show()
 
 func _on_CurrentShape_drag(positions, tile_ids):
-	print(positions)
 	var field = get_node("%FieldTileMap")
 	var preview_field = get_node("%PreviewTileMap")
 	# Remove all cells with num 4
