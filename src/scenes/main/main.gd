@@ -19,6 +19,8 @@ func new_game():
 	field.clear()
 	GameState.reset_score()
 	randomize_shape()
+	var tilemap = get_node("%CurrentShape").get_tilemap()
+	GameState.save_game_free_play(field, tilemap)
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")

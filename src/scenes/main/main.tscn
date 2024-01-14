@@ -198,7 +198,7 @@ color = Color( 0.333333, 0.670588, 0.831373, 1 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-position = Vector2( 181, 150 )
+position = Vector2( 181, 170 )
 
 [node name="Shapes" type="Node" parent="."]
 unique_name_in_owner = true
