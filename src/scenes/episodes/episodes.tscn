@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/episodes/episodes.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/buttons01.png" type="Texture" id=3]
+
+[node name="Episodes" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ItemList" type="ItemList" parent="."]
+anchor_right = 1.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+items = [ "Grandma's laptop", ExtResource( 3 ), false, "test", null, false ]
+auto_height = true
+fixed_icon_size = Vector2( 32, 32 )

@@ -7,7 +7,8 @@ func _ready():
 	randomize_shape()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
-	GameState.load_game_free_play(field, current_shape)
+	GameState.load_game_free_play(field, current_shape.get_tilemap())
+	current_shape.center()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -23,10 +24,11 @@ func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
 	var possible_shapes = get_node("%Shapes").get_children()
 	current_shape.randomize(possible_shapes)
-	if not shape_can_be_placed_anywhere(current_shape):
+	if not shape_can_be_placed_anywhere(current_shape.get_tilemap()):
 		get_node("%GameOverDialog").show()
 
 func _on_CurrentShape_drag(positions, tile_ids):
+	print(positions)
 	var field = get_node("%FieldTileMap")
 	var preview_field = get_node("%PreviewTileMap")
 	# Remove all cells with num 4
@@ -54,8 +56,9 @@ func _on_CurrentShape_drag(positions, tile_ids):
 			can_be_placed = false
 			continue
 
-	get_node("%CurrentShape").can_be_placed = can_be_placed
-	get_node("%CurrentShape").visible = not shape_covers_preview
+	var current_shape_container = get_node("%CurrentShape")
+	current_shape_container.can_be_placed = can_be_placed
+	current_shape_container.visible = not shape_covers_preview
 
 
 func _on_CurrentShape_place(block_positions, tile_ids):
@@ -78,7 +81,7 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	randomize_shape()
 	var current_shape = get_node("%CurrentShape")
 	current_shape.visible = true
-	GameState.save_game_free_play(field, current_shape)
+	GameState.save_game_free_play(field, current_shape.get_tilemap())
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")

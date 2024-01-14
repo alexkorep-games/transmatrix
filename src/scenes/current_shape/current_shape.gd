@@ -1,4 +1,4 @@
-extends TileMap
+extends Node2D
 
 signal drag(block_positions, tile_ids)
 signal place(block_positions, tile_ids)
@@ -17,6 +17,11 @@ var DRAG_DISTANCE_THRESHOLD = 10
 
 # Flag indicating if this shape can be placed on the grid
 export var can_be_placed = false
+
+onready var tilemap = get_node("%TileMap")
+
+func get_tilemap():
+	return tilemap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,6 +75,7 @@ func rotate_me():
 	if is_rotating:
 		return
 
+	center()
 	# Implement rotation of the tilemap by 90 degrees using tween
 	tween.interpolate_property(self, "rotation_degrees", 
 		rotation_degrees, rotation_degrees + 90, 0.2,
@@ -81,9 +87,10 @@ func on_tween_completed(object, key):
 	is_rotating = false
 	if key == ":rotation_degrees":
 		rotation_degrees = 0
-		rotate_tilemap_90_degrees_clockwise(self)
+		rotate_tilemap_90_degrees_clockwise()
+		center()
 
-func rotate_tilemap_90_degrees_clockwise(tilemap: TileMap):
+func rotate_tilemap_90_degrees_clockwise():
 	var original_tiles = []
 	var max_x = 0
 	var max_y = 0
@@ -106,16 +113,16 @@ func rotate_tilemap_90_degrees_clockwise(tilemap: TileMap):
 
 func get_block_positions():
 	var block_positions = []
-	for cell in get_used_cells():
-		var cell_position = map_to_world(cell)
-		var global_cell_position = to_global(cell_position)
+	for cell in tilemap.get_used_cells():
+		var cell_position = tilemap.map_to_world(cell)
+		var global_cell_position = tilemap.to_global(cell_position)
 		block_positions.append(global_cell_position)
 	return block_positions
 
 func get_tile_ids():
 	var tile_ids = []
-	for cell in get_used_cells():
-		var cell_id = get_cellv(cell)
+	for cell in tilemap.get_used_cells():
+		var cell_id = tilemap.get_cellv(cell)
 		tile_ids.append(cell_id)
 	return tile_ids
 
@@ -134,7 +141,7 @@ func place():
 	position = original_position
 
 func randomize(source_tilemaps):
-	clear()
+	tilemap.clear()
 	# select random element from source_tilemaps array
 	var source_tilemap = source_tilemaps[randi() % source_tilemaps.size()]
 	# copy tile data from source_tilemap to this tilemap
@@ -146,4 +153,10 @@ func randomize(source_tilemaps):
 				continue
 			# Random between 0 and 3
 			var new_tile_id = randi() % 4
-			set_cell(cell_x, cell_y, new_tile_id)
+			tilemap.set_cell(cell_x, cell_y, new_tile_id)
+	center()
+
+func center():
+	# Center the tilemap on the parent Control node
+	var tilemap_rect = tilemap.get_used_rect()
+	tilemap.position = -tilemap_rect.get_center()*tilemap.cell_size*tilemap.scale

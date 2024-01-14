@@ -3,12 +3,20 @@
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.gd" type="Script" id=2]
 
-[node name="CurrentShapeTileMap" type="TileMap"]
+[node name="CurrentShapeContainer" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
-position = Vector2( 100, 100 )
+position = Vector2( -80, -20 )
 scale = Vector2( 0.32, 0.32 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
-tile_data = PoolIntArray( -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0 )
-script = ExtResource( 2 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0 )
+
+[node name="Panel" type="ColorRect" parent="."]
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 5.0
+margin_bottom = 6.0

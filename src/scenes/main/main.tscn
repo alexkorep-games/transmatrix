@@ -185,13 +185,20 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Panel" type="Panel" parent="VBoxContainer/ShapesSource"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 8 )
+
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/ShapesSource"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.333333, 0.670588, 0.831373, 1 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
-position = Vector2( 180, 90 )
+unique_name_in_owner = true
+position = Vector2( 181, 150 )
 
 [node name="Shapes" type="Node" parent="."]
 unique_name_in_owner = true
