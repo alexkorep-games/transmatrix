@@ -20,6 +20,8 @@ func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
 	var possible_shapes = get_node("%Shapes").get_children()
 	current_shape.randomize(possible_shapes)
+	if not shape_can_be_placed_anywhere(current_shape):
+		get_node("%GameOverDialog").show()
 
 func _on_CurrentShape_drag(positions, tile_ids):
 	var field = get_node("%FieldTileMap")
@@ -71,11 +73,15 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	randomize_shape()
 	get_node("%CurrentShape").visible = true
 
-
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
 	get_node("%CurrentShape").visible = true
+
+func shape_can_be_placed_anywhere(current_shape_tilemap):
+	var field = get_node("%FieldTileMap")
+	var shape_blocks = current_shape_tilemap.get_used_cells()
+	return EndGameChecker.has_more_moves(field, shape_blocks, field_size.x, field_size.y)
 
 
 func _on_HUD_settings_pressed():
@@ -86,3 +92,6 @@ func _on_StartNewGameConfirmationDialog_confirmed():
 
 func _on_SettingsDialog_new_game():
 	get_node("%StartNewGameConfirmationDialog").show()
+
+func _on_ConfirmationDialog_confirmed():
+	new_game()

@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameState="*res://scripts/game_state.gd"
+EndGameChecker="*res://scripts/end_game_checker.gd"
 
 [display]
 
