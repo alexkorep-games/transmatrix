@@ -1,6 +1,7 @@
 extends Node
 
 var score := 0
+var is_free_play = true
 
 var SAVE_GAME_FILE := "user://save_game_free_play.dat"
 

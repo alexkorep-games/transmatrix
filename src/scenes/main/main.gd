@@ -5,15 +5,13 @@ var field_size = Vector2(8, 8)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize_shape()
+	GameState.reset_score()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
-	GameState.load_game_free_play(field, current_shape.get_tilemap())
+	if GameState.is_free_play:
+		GameState.load_game_free_play(field, current_shape.get_tilemap())
 	current_shape.center()
-	get_node("%PasswordLabel").password  = "qwerty1234"
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	get_node("%PasswordLabel").password  = "" if GameState.is_free_play else Story.get_password()
 
 func new_game():
 	var field = get_node("%FieldTileMap")
@@ -21,7 +19,8 @@ func new_game():
 	GameState.reset_score()
 	randomize_shape()
 	var tilemap = get_node("%CurrentShape").get_tilemap()
-	GameState.save_game_free_play(field, tilemap)
+	if GameState.is_free_play:
+		GameState.save_game_free_play(field, tilemap)
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
@@ -77,8 +76,9 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		do_block_removal_animation(removed_blocks)
 		var score = len(removed_blocks)
 		GameState.increase_score(score)
-		var password_label = get_node("%PasswordLabel")
-		password_label.open_chars(score)
+		if not GameState.is_free_play:
+			var password_label = get_node("%PasswordLabel")
+			password_label.open_chars(score)
 	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
@@ -107,7 +107,6 @@ func do_block_removal_animation(removed_blocks):
 	var animation_player = get_node("%ClearingShapesAnimationPlayer")
 	animation_player.play("blink")
 	
-
 func _on_HUD_settings_pressed():
 	get_node("%SettingsDialog").show()
 

@@ -1,27 +1,20 @@
 extends Control
 
-
-export var story_idx = 0
-var story
-var steps
-var step = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	step = 0
-	story = Story.story[story_idx]
-	steps = story["steps"]
-	update_images()
-	update_text()
+	update_images_and_text()
 	fade_in()
 
-func update_images():
-	var image_path = steps[step]["image"]
+func update_images_and_text():
+	var story = Story.story[Story.story_index]
+	var steps = story["steps"]
+	var step = steps[Story.story_step]
+
+	var image_path = step["image"]
 	var image = get_node("%ActorTextureRect")
 	image.texture = load(image_path)
 
-func update_text():
-	var text = steps[step]["text"]
+	var text = step["text"]
 	var label = get_node("%StoryTextLabel")
 	label.text = text
 	label.start()
@@ -37,12 +30,15 @@ func next_step():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "message_end":
-		step += 1
-		if step >= len(steps):
+		Story.next_step()
+		if Story.is_finished():
+			get_tree().change_scene("res://scenes/start_screen/start_screen.tscn")
+		elif Story.is_game():
 			get_tree().change_scene("res://scenes/main/main.tscn")
+			# Increment step index, so that next time we start from the next step
+			Story.next_step()
 		else:
-			update_images()
-			update_text()
+			update_images_and_text()
 			fade_in()
 
 func _on_StoryDialog_gui_input(event):
