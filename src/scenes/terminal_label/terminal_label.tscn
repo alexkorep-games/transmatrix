@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/terminal_label/terminal_label.gd" type="Script" id=2]
+
+[node name="TerminalLabel" type="Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+theme_type_variation = "DialogLabel"
+text = "My phone buzzed with a familiar ringtone. It was Grandma, sounding flustered as she explained she'd forgotten her laptop's password. I smiled, thinking how much she means to me. \"Don't worry, Grandma, I'll swing by after lunch and sort it out.\""
+autowrap = true
+script = ExtResource( 2 )
+
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="FillTimer" type="Timer" parent="."]
+wait_time = 0.01
+autostart = true
+
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="FillTimer" to="." method="_on_FillTimer_timeout"]

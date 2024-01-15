@@ -19,6 +19,6 @@ func _ready():
 func _on_FreePlayButton_pressed():
 	get_tree().change_scene("res://scenes/main/main.tscn")
 
-
 func _on_StoryModeButton_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+	

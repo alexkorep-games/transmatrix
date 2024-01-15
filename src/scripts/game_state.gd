@@ -30,7 +30,7 @@ func save_game_free_play(field_tile_map, current_shape_tile_map):
 	var result = {
 		"field": [],
 		"current_shape": [],
-		score: score
+		"score": score
 	}
 	for cell in field_tile_map.get_used_cells():
 		result["field"].append({
@@ -50,7 +50,7 @@ func save_game_free_play(field_tile_map, current_shape_tile_map):
 
 func load_game_free_play(field_tile_map, current_shape_tile_map):
 	var file := File.new()
-	if file.file_exists("user://save_game.dat"):
+	if file.file_exists(SAVE_GAME_FILE):
 		file.open(SAVE_GAME_FILE, File.READ)
 
 		var state = file.get_var()
