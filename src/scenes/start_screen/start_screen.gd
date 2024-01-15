@@ -22,6 +22,5 @@ func _on_FreePlayButton_pressed():
 
 func _on_StoryModeButton_pressed():
 	GameState.is_free_play = false
-	Story.start_story(0)
-	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+	get_tree().change_scene("res://scenes/episodes/episodes.tscn")
 	

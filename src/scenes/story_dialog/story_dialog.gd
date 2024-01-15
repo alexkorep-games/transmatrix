@@ -10,9 +10,17 @@ func update_images_and_text():
 	var steps = story["steps"]
 	var step = steps[Story.story_step]
 
-	var image_path = step["image"]
 	var image = get_node("%ActorTextureRect")
-	image.texture = load(image_path)
+	if "image" in step:
+		var image_path = step["image"]
+		image.texture = load(image_path)
+		image.show()
+	else:
+		image.hide()
+
+	var background_path = step["background"]
+	var background = get_node("%BackgroundTextureRect")
+	background.texture = load(background_path)
 
 	var text = step["text"]
 	var label = get_node("%StoryTextLabel")
