@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/settings_dialog/settings_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=8]
+[ext_resource path="res://scenes/password_label/password_label.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -190,11 +191,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/ShapesSource"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.333333, 0.670588, 0.831373, 1 )
+[node name="PasswordLabel" parent="VBoxContainer/ShapesSource/Panel" instance=ExtResource( 9 )]
+unique_name_in_owner = true
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 unique_name_in_owner = true
@@ -291,6 +289,7 @@ window_title = "Game Over"
 dialog_text = "Game Over"
 
 [connection signal="settings_pressed" from="VBoxContainer/HUD" to="." method="_on_HUD_settings_pressed"]
+[connection signal="password_cracked" from="VBoxContainer/ShapesSource/Panel/PasswordLabel" to="." method="_on_PasswordLabel_password_cracked"]
 [connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
 [connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
 [connection signal="place" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_place"]

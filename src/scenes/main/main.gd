@@ -9,6 +9,7 @@ func _ready():
 	var current_shape = get_node("%CurrentShape")
 	GameState.load_game_free_play(field, current_shape.get_tilemap())
 	current_shape.center()
+	get_node("%PasswordLabel").password  = "qwerty1234"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -76,6 +77,8 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		do_block_removal_animation(removed_blocks)
 		var score = len(removed_blocks)
 		GameState.increase_score(score)
+		var password_label = get_node("%PasswordLabel")
+		password_label.open_chars(score)
 	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
@@ -116,3 +119,6 @@ func _on_SettingsDialog_new_game():
 
 func _on_ConfirmationDialog_confirmed():
 	new_game()
+
+func _on_PasswordLabel_password_cracked():
+	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
