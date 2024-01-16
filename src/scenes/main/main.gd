@@ -4,14 +4,13 @@ var field_size = Vector2(8, 8)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize_shape()
-	GameState.reset_score()
+	new_game()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
 	if GameState.is_free_play:
 		GameState.load_game_free_play(field, current_shape.get_tilemap())
 	current_shape.center()
-	get_node("%PasswordLabel").password  = "" if GameState.is_free_play else Story.get_password()
+	
 
 func new_game():
 	var field = get_node("%FieldTileMap")
@@ -21,6 +20,14 @@ func new_game():
 	var tilemap = get_node("%CurrentShape").get_tilemap()
 	if GameState.is_free_play:
 		GameState.save_game_free_play(field, tilemap)
+
+	var progress_bar = get_node("%ProgressBar")
+	if GameState.is_free_play:
+		progress_bar.hide()
+	else:
+		progress_bar.show()
+		progress_bar.value = 0
+		progress_bar.max_value = Story.get_required_score()
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
@@ -77,8 +84,11 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		var score = len(removed_blocks)
 		GameState.increase_score(score)
 		if not GameState.is_free_play:
-			var password_label = get_node("%PasswordLabel")
-			password_label.open_chars(score)
+			var progress_bar = get_node("%ProgressBar")
+			progress_bar.value = GameState.score
+			if GameState.score >= Story.get_required_score():
+				# TODO play animation
+				get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
 	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
@@ -119,5 +129,5 @@ func _on_SettingsDialog_new_game():
 func _on_ConfirmationDialog_confirmed():
 	new_game()
 
-func _on_PasswordLabel_password_cracked():
-	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+# func _on_PasswordLabel_password_cracked():
+# 	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")

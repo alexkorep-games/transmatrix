@@ -24,16 +24,18 @@ func is_finished():
 func is_game():
 	return story[story_index]["steps"][story_step]["type"] == "game"
 
+func get_required_score():
+	return story[story_index]["score_required"]
 
 var story = [
 	{
 		"title": "The Grandma's laptop",
-		"password": "grandma",
+		"score_required": 10,
 		"steps":
 		[
 			{
 				"type": "dialog",
-				"text": "My phone buzzed with a familiar ringtone.",
+				"text": "My phone rang.",
 				"image": "res://assets/levels/001-grandma/phone-ring.png",
 				"background": "res://assets/levels/001-grandma/room.png"
 			},
@@ -64,7 +66,7 @@ var story = [
 	},
 	{
 		"title": "The Lost Cat Mystery",
-		"password": "whiskers",
+		"score_required": 50,
 		"steps":
 		[
 			{
@@ -94,7 +96,7 @@ var story = [
 	},
 	{
 		"title": "The Secret Recipe",
-		"password": "bolognese",
+		"score_required": 100,
 		"steps":
 		[
 			{
