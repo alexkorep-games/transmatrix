@@ -21,13 +21,8 @@ func new_game():
 	if GameState.is_free_play:
 		GameState.save_game_free_play(field, tilemap)
 
-	var progress_bar = get_node("%ProgressBar")
-	if GameState.is_free_play:
-		progress_bar.hide()
-	else:
-		progress_bar.show()
-		progress_bar.value = 0
-		progress_bar.max_value = Story.get_required_score()
+	var hud = get_node("%HUD")
+	hud.show_progress = not GameState.is_free_play
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
@@ -84,8 +79,6 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 		var score = len(removed_blocks)
 		GameState.increase_score(score)
 		if not GameState.is_free_play:
-			var progress_bar = get_node("%ProgressBar")
-			progress_bar.value = GameState.score
 			if GameState.score >= Story.get_required_score():
 				# TODO play animation
 				get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
