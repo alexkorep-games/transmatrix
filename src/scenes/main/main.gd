@@ -90,7 +90,8 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	randomize_shape()
 	var current_shape = get_node("%CurrentShape")
 	current_shape.visible = true
-	GameState.save_game_free_play(field, current_shape.get_tilemap())
+	if GameState.is_free_play:
+		GameState.save_game_free_play(field, current_shape.get_tilemap())
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
