@@ -4,25 +4,27 @@ var field_size = Vector2(8, 8)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	new_game()
+	init_field()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
 	if GameState.is_free_play:
 		GameState.load_game_free_play(field, current_shape.get_tilemap())
 	current_shape.center()
 	
-
-func new_game():
+func init_field():
 	var field = get_node("%FieldTileMap")
 	field.clear()
 	GameState.reset_score()
 	randomize_shape()
+	var hud = get_node("%HUD")
+	hud.show_progress = not GameState.is_free_play
+
+func new_game():
+	init_field()
+	var field = get_node("%FieldTileMap")
 	var tilemap = get_node("%CurrentShape").get_tilemap()
 	if GameState.is_free_play:
 		GameState.save_game_free_play(field, tilemap)
-
-	var hud = get_node("%HUD")
-	hud.show_progress = not GameState.is_free_play
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
