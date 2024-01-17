@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
 position = Vector2( -80, -20 )
-scale = Vector2( 0.32, 0.32 )
+scale = Vector2( 0.24, 0.24 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1

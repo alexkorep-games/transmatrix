@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/hud/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/settings_dialog/settings_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=8]
+[ext_resource path="res://assets/ui/communicator.png" type="Texture" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -116,6 +117,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+expand = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -133,15 +140,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/Field"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.137255, 0.313726, 0.423529, 1 )
 
 [node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
-position = Vector2( 16, 16 )
+position = Vector2( 56, 72 )
+scale = Vector2( 0.24, 0.24 )
 
 [node name="BackgroundTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
-scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
@@ -150,7 +158,6 @@ script = ExtResource( 5 )
 
 [node name="FieldTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
-scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
@@ -159,7 +166,6 @@ script = ExtResource( 5 )
 [node name="ClearingShapesFieldTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
 visible = false
-scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
@@ -174,7 +180,6 @@ anims/blink = SubResource( 2 )
 [node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0.498039 )
-scale = Vector2( 0.32, 0.32 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
@@ -187,13 +192,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="VBoxContainer/ShapesSource"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-position = Vector2( 181, 170 )
+position = Vector2( 181, 176 )
 
 [node name="CheatButton" type="Button" parent="VBoxContainer/ShapesSource"]
 margin_left = 297.0
