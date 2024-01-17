@@ -16,10 +16,14 @@ func start_story(index):
 func next_step():
 	story_step += 1
 
-
 func is_finished():
 	return story_step >= len(story[story_index]["steps"])
 
+func get_current_step():
+	return story[story_index]["steps"][story_step]
+
+func get_current_step_type():
+	return get_current_step()["type"]
 
 func is_game():
 	return story[story_index]["steps"][story_step]["type"] == "game"
@@ -34,24 +38,41 @@ var story = [
 		"steps":
 		[
 			{
+				"type": "title",
+				"text": "Chapter 1.\nThe Grandma's Laptop",
+			},
+			{
 				"type": "dialog",
 				"text": "My phone rang.",
-				"image": "res://assets/levels/001-grandma/phone-ring.png",
-				"background": "res://assets/levels/001-grandma/room.png"
+				"image": "res://assets/levels/001-grandma/fg_phone-ring.png",
+				"background": "res://assets/levels/001-grandma/bg_my_room.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"It was Grandma, sounding flustered as she explained she'd forgotten her laptop's password.",
-				"image": "res://assets/levels/001-grandma/grandma.png",
-				"background": "res://assets/levels/001-grandma/room.png"
+				"image": "res://assets/levels/001-grandma/fg_grandma.png",
+				"background": "res://assets/levels/001-grandma/bg_my_room.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"I smiled, thinking how much she means to me. \"Don't worry, Grandma, I'll swing by after lunch and sort it out.\"",
-				"image": "res://assets/levels/001-grandma/grandma.png",
-				"background": "res://assets/levels/001-grandma/room.png"
+				"image": "res://assets/levels/001-grandma/fg_grandma.png",
+				"background": "res://assets/levels/001-grandma/bg_my_room.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				"My grandma lives in the nice old house and I have so many child memories about this place.",
+				"background": "res://assets/levels/001-grandma/bg_grandma_house.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				"Thank you for coming, diar! Here is the laptop. I will make some cookies for you while you are working.",
+				"image": "res://assets/levels/001-grandma/fg_grandma.png",
+				"background": "res://assets/levels/001-grandma/bg_grandma_room.png"
 			},
 			{
 				"type": "game",
@@ -59,8 +80,8 @@ var story = [
 			{
 				"type": "dialog",
 				"text": '"Oh, thank you, dear!" she said, "Have a cookie!"',
-				"image": "res://assets/levels/001-grandma/grandma.png",
-				"background": "res://assets/levels/001-grandma/room.png"
+				"image": "res://assets/levels/001-grandma/fg_grandma.png",
+				"background": "res://assets/levels/001-grandma/bg_cookie_table.png"
 			},
 		]
 	},

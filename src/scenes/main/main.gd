@@ -127,3 +127,7 @@ func _on_ConfirmationDialog_confirmed():
 
 # func _on_PasswordLabel_password_cracked():
 # 	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+
+
+func _on_CheatButton_pressed():
+	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")

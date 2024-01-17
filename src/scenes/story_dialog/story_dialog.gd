@@ -2,15 +2,24 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	update_images_and_text()
-	fade_in()
+	start_step()
 
-func update_images_and_text():
-	var story = Story.story[Story.story_index]
-	var steps = story["steps"]
-	var step = steps[Story.story_step]
+func start_step():
+	# Start playing the current step
+	var type = Story.get_current_step_type()
+	if type == "title":
+		start_title_step()
+	elif type == "dialog":
+		start_dialog_step()
+	else:
+		start_game_step()
 
+func start_title_step():
+	get_node("%AnimationPlayer").play("title_start")
+
+func start_dialog_step():
 	var image = get_node("%ActorTextureRect")
+	var step = Story.get_current_step()
 	if "image" in step:
 		var image_path = step["image"]
 		image.texture = load(image_path)
@@ -26,32 +35,32 @@ func update_images_and_text():
 	var label = get_node("%StoryTextLabel")
 	label.text = text
 	label.start()
-
-func fade_in():
 	get_node("%AnimationPlayer").play("message_start")
 
-func fade_out():
-	get_node("%AnimationPlayer").play("message_end")
+func start_game_step():
+	get_tree().change_scene("res://scenes/main/main.tscn")
+	# Increment step index, so that next time we start from the next step
+	Story.next_step()
 	
-func next_step():
-	fade_out()
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "message_end":
-		Story.next_step()
-		if Story.is_finished():
-			get_tree().change_scene("res://scenes/start_screen/start_screen.tscn")
-		elif Story.is_game():
-			get_tree().change_scene("res://scenes/main/main.tscn")
-			# Increment step index, so that next time we start from the next step
-			Story.next_step()
-		else:
-			update_images_and_text()
-			fade_in()
-
 func _on_StoryDialog_gui_input(event):
 	# if mouse pressed
 	if event is InputEventMouseButton and event.pressed:
-		next_step()
+		# Play dialog-end animation	
+		var type = Story.get_current_step_type()
+		if type == "title":
+			print("title_end")
+			get_node("%AnimationPlayer").play("title_end")
+		elif type == "dialog":
+			print("message_end")
+			get_node("%AnimationPlayer").play("message_end")
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "message_end" or anim_name == "title_end":
+		# animation finished, go to the next step
+		Story.next_step()
+		print("next step")
+		if Story.is_finished():
+			get_tree().change_scene("res://scenes/start_screen/start_screen.tscn")
+		else:
+			start_step()
 

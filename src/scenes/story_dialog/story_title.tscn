@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/story_dialog/story_title.gd" type="Script" id=2]
+
+[node name="StoryTitle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="StoryTitleLabel" type="Label" parent="."]
+unique_name_in_owner = true
+margin_left = 31.0
+margin_top = 237.0
+margin_right = 330.0
+margin_bottom = 378.0
+theme = ExtResource( 1 )
+theme_type_variation = "StoryTitleLabel"
+text = "Chapter 1.
+The Grandma's Laptop"
+align = 1
+autowrap = true

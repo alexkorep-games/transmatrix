@@ -195,6 +195,12 @@ theme = ExtResource( 8 )
 unique_name_in_owner = true
 position = Vector2( 181, 170 )
 
+[node name="CheatButton" type="Button" parent="VBoxContainer/ShapesSource"]
+margin_left = 297.0
+margin_top = 20.0
+margin_right = 318.0
+margin_bottom = 44.0
+
 [node name="Shapes" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -289,6 +295,7 @@ dialog_text = "Game Over"
 [connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
 [connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
 [connection signal="place" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_place"]
+[connection signal="pressed" from="VBoxContainer/ShapesSource/CheatButton" to="." method="_on_CheatButton_pressed"]
 [connection signal="confirmed" from="StartNewGameConfirmationDialog" to="." method="_on_StartNewGameConfirmationDialog_confirmed"]
 [connection signal="new_game" from="SettingsDialog" to="." method="_on_SettingsDialog_new_game"]
 [connection signal="confirmed" from="GameOverDialog" to="." method="_on_ConfirmationDialog_confirmed"]

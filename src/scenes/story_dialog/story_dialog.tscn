@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/levels/001-grandma/room.png" type="Texture" id=2]
-[ext_resource path="res://assets/levels/001-grandma/grandma.png" type="Texture" id=3]
+[ext_resource path="res://assets/levels/001-grandma/bg_my_room.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/001-grandma/fg_grandma.png" type="Texture" id=3]
 [ext_resource path="res://scenes/story_dialog/story_dialog.gd" type="Script" id=4]
 [ext_resource path="res://scenes/terminal_label/terminal_label.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/story_dialog/story_title.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=2]
 resource_name = "message_end"
@@ -60,6 +61,60 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.352941 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "title_end"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StoryTitle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StoryTitle:label_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "title_start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StoryTitle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StoryTitle:label_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="StoryDialog" type="Control"]
@@ -137,10 +192,15 @@ margin_bottom = 234.0
 size_flags_vertical = 7
 text = "My phone buzzed with a familiar ringtone."
 
+[node name="StoryTitle" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 anims/message_end = SubResource( 2 )
 anims/message_start = SubResource( 1 )
+anims/title_end = SubResource( 4 )
+anims/title_start = SubResource( 3 )
 
 [connection signal="gui_input" from="." to="." method="_on_StoryDialog_gui_input"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
