@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://assets/fonts/apple-ii-screen-typeface-font/AppleIiScreenTypeface-2aP3.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/ui/buttons02.png" type="Texture" id=2]
@@ -25,6 +25,9 @@ margin_bottom = 47.7574
 size = 20
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0.25098, 0, 1 )
 
@@ -47,6 +50,8 @@ DialogLabel/fonts/font = SubResource( 3 )
 DialogPanel/base_type = "Panel"
 DialogPanel/styles/panel = SubResource( 7 )
 Label/fonts/font = SubResource( 1 )
+LabelEpisodeItem/base_type = "Label"
+LabelEpisodeItem/fonts/font = SubResource( 8 )
 Panel/styles/panel = ExtResource( 4 )
 ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
 ProgressBar/styles/bg = SubResource( 4 )

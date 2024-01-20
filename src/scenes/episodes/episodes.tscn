@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://scenes/episodes/episode_item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/episodes/episodes.gd" type="Script" id=2]
 
 [node name="Episodes" type="Control"]
@@ -7,15 +8,92 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0509804, 0.52549, 0.733333, 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -168.0
+margin_right = 168.0
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
 unique_name_in_owner = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 360.0
-
-[node name="GridContainer" type="GridContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 324.0
+margin_bottom = 1472.0
 columns = 2
+
+[node name="EpisodeItem" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_bottom = 242.0
+
+[node name="EpisodeItem2" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_right = 324.0
+margin_bottom = 242.0
+
+[node name="EpisodeItem3" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 246.0
+margin_bottom = 488.0
+
+[node name="EpisodeItem4" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_top = 246.0
+margin_right = 324.0
+margin_bottom = 488.0
+
+[node name="EpisodeItem5" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 492.0
+margin_bottom = 734.0
+
+[node name="EpisodeItem6" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_top = 492.0
+margin_right = 324.0
+margin_bottom = 734.0
+
+[node name="EpisodeItem7" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 738.0
+margin_bottom = 980.0
+
+[node name="EpisodeItem8" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_top = 738.0
+margin_right = 324.0
+margin_bottom = 980.0
+
+[node name="EpisodeItem9" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 984.0
+margin_bottom = 1226.0
+
+[node name="EpisodeItem10" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_top = 984.0
+margin_right = 324.0
+margin_bottom = 1226.0
+
+[node name="EpisodeItem11" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_top = 1230.0
+margin_bottom = 1472.0
+
+[node name="EpisodeItem12" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+margin_left = 164.0
+margin_top = 1230.0
+margin_right = 324.0
+margin_bottom = 1472.0
+
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem2" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem3" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem4" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem5" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem6" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem7" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem8" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem9" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem10" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem11" to="." method="_on_EpisodeItem_pressed"]
+[connection signal="pressed" from="ScrollContainer/GridContainer/EpisodeItem12" to="." method="_on_EpisodeItem_pressed"]
