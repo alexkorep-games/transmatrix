@@ -43,6 +43,7 @@ var story = [
 	{
 		"title": "Chapter 1\nThe Broken Traffic Light",
 		"score_required": 10,
+		"thumbnail_filename": "res://assets/levels/001-traffic-light/street.png",
 		"steps":
 		[
 			{"type": "title", "text": "Chapter 1.\nThe Broken Traffic Light"},
@@ -99,6 +100,7 @@ var story = [
 	{
 		"title": "Chapter 2\nThe Grandma's laptop",
 		"score_required": 20,
+		"thumbnail_filename": "res://assets/levels/002-grandma/bg_grandma_house.png",
 		"steps":
 		[
 			{
