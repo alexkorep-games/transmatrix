@@ -2,7 +2,6 @@ extends Label
 
 
 var full_text := ""
-var cursor_visible = false
 
 var CHARS_PER_SEC = 50
 var sum_delta = 0
@@ -21,19 +20,8 @@ func start():
 	full_text = text
 	text = ""
 
-
-func _on_Timer_timeout():
-	if cursor_visible:
-		var tmp = text
-		tmp.erase(len(tmp) - 1, 1)
-		text = tmp
-	else:
-		text += "_"
-	cursor_visible = not cursor_visible
-
-
 func next_char():
-	var strlen = len(text) - (1 if cursor_visible else 0)
+	var strlen = len(text)
 	if strlen >= len(full_text):
 		return
 	var next_char = full_text[strlen]

@@ -127,15 +127,10 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
-unique_name_in_owner = true
-margin_bottom = 40.0
-
 [node name="Field" type="Control" parent="VBoxContainer"]
-margin_top = 44.0
 margin_right = 360.0
-margin_bottom = 404.0
-rect_min_size = Vector2( 0, 360 )
+margin_bottom = 450.0
+rect_min_size = Vector2( 0, 450 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -146,7 +141,7 @@ anchor_bottom = 1.0
 color = Color( 0.137255, 0.313726, 0.423529, 1 )
 
 [node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
-position = Vector2( 56, 72 )
+position = Vector2( 56, 140 )
 scale = Vector2( 0.24, 0.24 )
 
 [node name="BackgroundTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
@@ -184,8 +179,13 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
+[node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
+unique_name_in_owner = true
+margin_top = 454.0
+margin_bottom = 494.0
+
 [node name="ShapesSource" type="Control" parent="VBoxContainer"]
-margin_top = 408.0
+margin_top = 498.0
 margin_right = 360.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -199,7 +199,7 @@ theme = ExtResource( 8 )
 
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-position = Vector2( 181, 176 )
+position = Vector2( 177, 88 )
 drag_offset = Vector2( 0, -130 )
 drag_scale = Vector2( 2, 2 )
 

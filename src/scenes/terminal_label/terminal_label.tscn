@@ -11,9 +11,3 @@ theme_type_variation = "DialogLabel"
 text = "My phone buzzed with a familiar ringtone. It was Grandma, sounding flustered as she explained she'd forgotten her laptop's password. I smiled, thinking how much she means to me. \"Don't worry, Grandma, I'll swing by after lunch and sort it out.\""
 autowrap = true
 script = ExtResource( 2 )
-
-[node name="BlinkTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[connection signal="timeout" from="BlinkTimer" to="." method="_on_Timer_timeout"]

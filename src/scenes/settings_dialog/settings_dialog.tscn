@@ -21,26 +21,27 @@ anchor_bottom = 1.0
 margin_top = 31.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 34.0
-margin_top = 47.0
-margin_right = 325.0
-margin_bottom = 352.0
+margin_left = 73.0
+margin_top = 65.0
+margin_right = 286.0
+margin_bottom = 334.0
 
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 291.0
-margin_bottom = 99.453
+margin_right = 213.0
+margin_bottom = 87.9257
 text = "New game"
 
 [node name="MainScreenButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 103.0
-margin_right = 291.168
-margin_bottom = 202.453
+margin_top = 91.0
+margin_right = 213.813
+margin_bottom = 178.926
 text = "Main screen"
 
 [node name="CloseButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 206.0
-margin_right = 291.0
-margin_bottom = 305.453
+margin_top = 182.0
+margin_right = 213.0
+margin_bottom = 269.926
+theme_type_variation = "RedButton"
 text = "Close"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]

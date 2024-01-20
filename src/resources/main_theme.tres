@@ -1,8 +1,10 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/apple-ii-screen-typeface-font/AppleIiScreenTypeface-2aP3.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/ui/buttons02.png" type="Texture" id=2]
 [ext_resource path="res://resources/button_styleboxtexture.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/panel_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/button_red_styleboxtexture.tres" type="StyleBox" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -10,6 +12,14 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 2 )
+region_rect = Rect2( 1019.61, 0.892166, 406.393, 122.816 )
+margin_left = 37.9418
+margin_right = 37.5728
+margin_top = 27.4951
+margin_bottom = 47.7574
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -34,11 +44,17 @@ Button/styles/pressed = ExtResource( 3 )
 DialogLabel/base_type = "Label"
 DialogLabel/colors/font_color = Color( 0, 0.8, 0, 1 )
 DialogLabel/fonts/font = SubResource( 3 )
+DialogPanel/base_type = "Panel"
+DialogPanel/styles/panel = SubResource( 7 )
 Label/fonts/font = SubResource( 1 )
 Panel/styles/panel = ExtResource( 4 )
 ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
 ProgressBar/styles/bg = SubResource( 4 )
 ProgressBar/styles/fg = SubResource( 5 )
+RedButton/base_type = "Button"
+RedButton/styles/focus = ExtResource( 5 )
+RedButton/styles/hover = ExtResource( 5 )
+RedButton/styles/normal = ExtResource( 5 )
 StoryTitleLabel/base_type = "Label"
 StoryTitleLabel/colors/font_color = Color( 1, 1, 1, 1 )
 StoryTitleLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )

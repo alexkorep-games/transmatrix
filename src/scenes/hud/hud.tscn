@@ -11,6 +11,7 @@ rect_min_size = Vector2( 0, 40 )
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.278431, 0.639216, 0.819608, 1 )
@@ -38,11 +39,12 @@ align = 2
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 36.0
+margin_top = 10.0
 margin_right = 164.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 128, 0 )
+margin_bottom = 22.0
+rect_min_size = Vector2( 128, 12 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme = ExtResource( 3 )
 value = 78.0
 percent_visible = false
