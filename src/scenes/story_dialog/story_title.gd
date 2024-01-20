@@ -10,4 +10,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	get_node("%StoryTitleLabel").text = Story.get_title()
 	get_node("%StoryTitleLabel").modulate = label_modulate

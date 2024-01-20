@@ -36,11 +36,13 @@ func is_game():
 func get_required_score():
 	return story[story_index]["score_required"]
 
+func get_title():
+	return story[story_index]["title"]
 
 var story = [
 	{
-		"title": "The Broken Traffic Light",
-		"score_required": 20,
+		"title": "Chapter 1\nThe Broken Traffic Light",
+		"score_required": 10,
 		"steps":
 		[
 			{"type": "title", "text": "Chapter 1.\nThe Broken Traffic Light"},
@@ -95,8 +97,8 @@ var story = [
 		]
 	},
 	{
-		"title": "The Grandma's laptop",
-		"score_required": 10,
+		"title": "Chapter 2\nThe Grandma's laptop",
+		"score_required": 20,
 		"steps":
 		[
 			{
