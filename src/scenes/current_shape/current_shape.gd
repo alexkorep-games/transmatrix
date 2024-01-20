@@ -18,6 +18,12 @@ var DRAG_DISTANCE_THRESHOLD = 10
 # Flag indicating if this shape can be placed on the grid
 export var can_be_placed = false
 
+# When start dragging, the tilemap will be offset by this amount
+export var drag_offset := Vector2()
+
+# When dragging, the tilemap position will be amplified by this amount
+export var drag_scale := Vector2(1, 1)
+
 onready var tilemap = get_node("%TileMap")
 
 func get_tilemap():
@@ -60,7 +66,7 @@ func _process(delta):
 	if dragging:
 		var drag_current = get_global_mouse_position()
 		var drag_delta = drag_current - drag_start
-		position = original_position + drag_delta
+		position = original_position + drag_delta*drag_scale + drag_offset
 
 		emit_drag_signal()
 

@@ -200,6 +200,8 @@ theme = ExtResource( 8 )
 [node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
 unique_name_in_owner = true
 position = Vector2( 181, 176 )
+drag_offset = Vector2( 0, -130 )
+drag_scale = Vector2( 2, 2 )
 
 [node name="CheatButton" type="Button" parent="VBoxContainer/ShapesSource"]
 margin_left = 297.0
