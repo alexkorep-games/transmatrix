@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/found-cat.png-1806f82d06b57ca01817056c85eb927d.stex"
+path="res://.import/chip.png-ef368105f4d2063ae3ee95002370e3f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/002-lostcat/found-cat.png"
-dest_files=[ "res://.import/found-cat.png-1806f82d06b57ca01817056c85eb927d.stex" ]
+source_file="res://assets/levels/001-traffic-light/chip.png"
+dest_files=[ "res://.import/chip.png-ef368105f4d2063ae3ee95002370e3f5.stex" ]
 
 [params]
 

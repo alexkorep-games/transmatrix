@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fg_phone-ring.png-52892d02254db465c435221e4fcfd351.stex"
+path="res://.import/rules.png-9c9a65a2e82dabca1146d5a620583cf0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/001-grandma/fg_phone-ring.png"
-dest_files=[ "res://.import/fg_phone-ring.png-52892d02254db465c435221e4fcfd351.stex" ]
+source_file="res://assets/levels/001-traffic-light/rules.png"
+dest_files=[ "res://.import/rules.png-9c9a65a2e82dabca1146d5a620583cf0.stex" ]
 
 [params]
 

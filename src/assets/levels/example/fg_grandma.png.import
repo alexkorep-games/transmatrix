@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clue.png-fef9d6eae2c186d21900c956473eec2e.stex"
+path="res://.import/fg_grandma.png-4263b92fb1e3b06213c699f3cc239a34.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/003-secretrecipe/clue.png"
-dest_files=[ "res://.import/clue.png-fef9d6eae2c186d21900c956473eec2e.stex" ]
+source_file="res://assets/levels/example/fg_grandma.png"
+dest_files=[ "res://.import/fg_grandma.png-4263b92fb1e3b06213c699f3cc239a34.stex" ]
 
 [params]
 

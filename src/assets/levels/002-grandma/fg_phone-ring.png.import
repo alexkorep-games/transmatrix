@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/aunt-maria.png-8b415eaac5214b3114c6634e52b542e5.stex"
+path="res://.import/fg_phone-ring.png-3a41fa2f978f4ea4632e36f21b384138.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/003-secretrecipe/aunt-maria.png"
-dest_files=[ "res://.import/aunt-maria.png-8b415eaac5214b3114c6634e52b542e5.stex" ]
+source_file="res://assets/levels/002-grandma/fg_phone-ring.png"
+dest_files=[ "res://.import/fg_phone-ring.png-3a41fa2f978f4ea4632e36f21b384138.stex" ]
 
 [params]
 

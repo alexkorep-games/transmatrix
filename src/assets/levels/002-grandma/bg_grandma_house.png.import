@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg_cookie_table.png-86b3898dab904a60ccf347f85f9ff904.stex"
+path="res://.import/bg_grandma_house.png-ef4f18926d51ef912091484dc58fb0d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/001-grandma/bg_cookie_table.png"
-dest_files=[ "res://.import/bg_cookie_table.png-86b3898dab904a60ccf347f85f9ff904.stex" ]
+source_file="res://assets/levels/002-grandma/bg_grandma_house.png"
+dest_files=[ "res://.import/bg_grandma_house.png-ef4f18926d51ef912091484dc58fb0d7.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/missing-cat-poster.png-7964be3edf7b6d5c3a59346e84f0602b.stex"
+path="res://.import/phone-ring.png-e2608f5aed14e2441781b46d3a7615ba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/002-lostcat/missing-cat-poster.png"
-dest_files=[ "res://.import/missing-cat-poster.png-7964be3edf7b6d5c3a59346e84f0602b.stex" ]
+source_file="res://assets/levels/001-traffic-light/phone-ring.png"
+dest_files=[ "res://.import/phone-ring.png-e2608f5aed14e2441781b46d3a7615ba.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fg_grandma.png-403eb09c8923acb5b3f34ec4a7405c41.stex"
+path="res://.import/laura.png-da8e3e172042acff1b162914220e798c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/001-grandma/fg_grandma.png"
-dest_files=[ "res://.import/fg_grandma.png-403eb09c8923acb5b3f34ec4a7405c41.stex" ]
+source_file="res://assets/levels/001-traffic-light/laura.png"
+dest_files=[ "res://.import/laura.png-da8e3e172042acff1b162914220e798c.stex" ]
 
 [params]
 

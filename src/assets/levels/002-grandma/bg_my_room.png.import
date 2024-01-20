@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/helping-hand.png-940b0eeb13b30e879979915bd3bc47ba.stex"
+path="res://.import/bg_my_room.png-033f3172e53b80644a467cd555f61129.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/002-lostcat/helping-hand.png"
-dest_files=[ "res://.import/helping-hand.png-940b0eeb13b30e879979915bd3bc47ba.stex" ]
+source_file="res://assets/levels/002-grandma/bg_my_room.png"
+dest_files=[ "res://.import/bg_my_room.png-033f3172e53b80644a467cd555f61129.stex" ]
 
 [params]
 

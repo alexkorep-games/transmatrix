@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coffee.png-8ef8ce005b8c4ab6f6eeb481ff9f1d88.stex"
+path="res://.import/street.png-a4edcf4e1b3aca33a7c60b214beaf3dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/002-lostcat/coffee.png"
-dest_files=[ "res://.import/coffee.png-8ef8ce005b8c4ab6f6eeb481ff9f1d88.stex" ]
+source_file="res://assets/levels/001-traffic-light/street.png"
+dest_files=[ "res://.import/street.png-a4edcf4e1b3aca33a7c60b214beaf3dc.stex" ]
 
 [params]
 

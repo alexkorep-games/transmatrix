@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/levels/001-grandma/bg_my_room.png" type="Texture" id=2]
-[ext_resource path="res://assets/levels/001-grandma/fg_grandma.png" type="Texture" id=3]
+[ext_resource path="res://assets/levels/example/bg_my_room.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/example/fg_grandma.png" type="Texture" id=3]
 [ext_resource path="res://scenes/story_dialog/story_dialog.gd" type="Script" id=4]
 [ext_resource path="res://scenes/terminal_label/terminal_label.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/story_dialog/story_title.tscn" type="PackedScene" id=6]

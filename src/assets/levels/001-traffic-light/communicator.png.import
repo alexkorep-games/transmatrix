@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg_grandma_room.png-457563cbf9855d95804c195be7339db5.stex"
+path="res://.import/communicator.png-f6ef028edfed4f367c515ac259577351.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/001-grandma/bg_grandma_room.png"
-dest_files=[ "res://.import/bg_grandma_room.png-457563cbf9855d95804c195be7339db5.stex" ]
+source_file="res://assets/levels/001-traffic-light/communicator.png"
+dest_files=[ "res://.import/communicator.png-f6ef028edfed4f367c515ac259577351.stex" ]
 
 [params]
 

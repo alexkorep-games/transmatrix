@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/success.png-fc7404d6efdba3ccbd322258042232fb.stex"
+path="res://.import/player.png-adada4886b759d72bbe839b7f68a2532.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/levels/003-secretrecipe/success.png"
-dest_files=[ "res://.import/success.png-fc7404d6efdba3ccbd322258042232fb.stex" ]
+source_file="res://assets/levels/001-traffic-light/player.png"
+dest_files=[ "res://.import/player.png-adada4886b759d72bbe839b7f68a2532.stex" ]
 
 [params]
 

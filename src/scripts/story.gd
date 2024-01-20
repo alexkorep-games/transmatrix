@@ -16,22 +16,84 @@ func start_story(index):
 func next_step():
 	story_step += 1
 
+
 func is_finished():
 	return story_step >= len(story[story_index]["steps"])
+
 
 func get_current_step():
 	return story[story_index]["steps"][story_step]
 
+
 func get_current_step_type():
 	return get_current_step()["type"]
+
 
 func is_game():
 	return story[story_index]["steps"][story_step]["type"] == "game"
 
+
 func get_required_score():
 	return story[story_index]["score_required"]
 
+
 var story = [
+	{
+		"title": "The Broken Traffic Light",
+		"score_required": 20,
+		"steps":
+		[
+			{"type": "title", "text": "Chapter 1.\nThe Broken Traffic Light"},
+			{
+				"type": "dialog",
+				"text": "It was Saturday morning, and I was ready to go fishing.",
+				"image": "res://assets/levels/001-traffic-light/player.png",
+				"background": "res://assets/levels/001-traffic-light/house.png"
+			},
+			{
+				"type": "dialog",
+				"text": "But then my phone rang, and it was Laura from the municipality.",
+				"image": "res://assets/levels/001-traffic-light/phone-ring.png",
+				"background": "res://assets/levels/001-traffic-light/house.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				'She said, "We have a job for you. The traffic light is broken, and you need to go there immediately because we sent Billy from the police department there, but he cannot be there for the entire day regulating the traffic."',
+				"image": "res://assets/levels/001-traffic-light/laura.png",
+				"background": "res://assets/levels/001-traffic-light/house.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				"So, yeah, it's my job. I went there, and sure enough, the traffic light wasn't working properly. Both the green and red lights were on. I opened my toolbox, ready to fix it.",
+				"image": "res://assets/levels/001-traffic-light/toolbox.png",
+				"background": "res://assets/levels/001-traffic-light/street.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				"Fixing something is always like a puzzle game for me. You have to arrange the shapes of different colors to make the block colors match. And if you do it well enough, you can fix it.",
+					"image": "res://assets/levels/001-traffic-light/rules.png",
+				"background": "res://assets/levels/001-traffic-light/street.png"
+			},
+			{"type": "game"},
+			{
+				"type": "dialog",
+				"text":
+				"The traffic lights were fixed, but I noticed that there was something wrong with the schematics. There was a chip that wasn't supposed to be there. I removed the chip and took it with me.",
+				"image": "res://assets/levels/001-traffic-light/chip.png",
+				"background": "res://assets/levels/001-traffic-light/street.png"
+			},
+			{
+				"type": "dialog",
+				"text":
+				"Then, as I was driving back home, I called Laura and told her that everything was fixed and the traffic lights were working. Finally, I could get back home and go fishing.",
+				"image": "res://assets/levels/001-traffic-light/player.png",
+				"background": "res://assets/levels/001-traffic-light/house.png"
+			}
+		]
+	},
 	{
 		"title": "The Grandma's laptop",
 		"score_required": 10,
@@ -39,40 +101,40 @@ var story = [
 		[
 			{
 				"type": "title",
-				"text": "Chapter 1.\nThe Grandma's Laptop",
+				"text": "Chapter 2.\nThe Grandma's Laptop",
 			},
 			{
 				"type": "dialog",
 				"text": "My phone rang.",
-				"image": "res://assets/levels/001-grandma/fg_phone-ring.png",
-				"background": "res://assets/levels/001-grandma/bg_my_room.png"
+				"image": "res://assets/levels/002-grandma/fg_phone-ring.png",
+				"background": "res://assets/levels/002-grandma/bg_my_room.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"It was Grandma, sounding flustered as she explained she'd forgotten her laptop's password.",
-				"image": "res://assets/levels/001-grandma/fg_grandma.png",
-				"background": "res://assets/levels/001-grandma/bg_my_room.png"
+				"image": "res://assets/levels/002-grandma/fg_grandma.png",
+				"background": "res://assets/levels/002-grandma/bg_my_room.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"I smiled, thinking how much she means to me. \"Don't worry, Grandma, I'll swing by after lunch and sort it out.\"",
-				"image": "res://assets/levels/001-grandma/fg_grandma.png",
-				"background": "res://assets/levels/001-grandma/bg_my_room.png"
+				"image": "res://assets/levels/002-grandma/fg_grandma.png",
+				"background": "res://assets/levels/002-grandma/bg_my_room.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"My grandma lives in the nice old house and I have so many child memories about this place.",
-				"background": "res://assets/levels/001-grandma/bg_grandma_house.png"
+				"background": "res://assets/levels/002-grandma/bg_grandma_house.png"
 			},
 			{
 				"type": "dialog",
 				"text":
 				"Thank you for coming, diar! Here is the laptop. I will make some cookies for you while you are working.",
-				"image": "res://assets/levels/001-grandma/fg_grandma.png",
-				"background": "res://assets/levels/001-grandma/bg_grandma_room.png"
+				"image": "res://assets/levels/002-grandma/fg_grandma.png",
+				"background": "res://assets/levels/002-grandma/bg_grandma_room.png"
 			},
 			{
 				"type": "game",
@@ -80,70 +142,10 @@ var story = [
 			{
 				"type": "dialog",
 				"text": '"Oh, thank you, dear!" she said, "Have a cookie!"',
-				"image": "res://assets/levels/001-grandma/fg_grandma.png",
-				"background": "res://assets/levels/001-grandma/bg_cookie_table.png"
+				"image": "res://assets/levels/002-grandma/fg_grandma.png",
+				"background": "res://assets/levels/002-grandma/bg_cookie_table.png"
 			},
 		]
 	},
-	{
-		"title": "The Lost Cat Mystery",
-		"score_required": 50,
-		"steps":
-		[
-			{
-				"type": "dialog",
-				"text": "I was enjoying my morning coffee when I heard a soft meowing outside.",
-				"background": "res://assets/levels/002-lostcat/coffee.png"
-			},
-			{
-				"type": "dialog",
-				"text":
-				"Looking out the window, I saw Mrs. Johnson from next door, holding a 'Missing Cat' poster.",
-				"background": "res://assets/levels/002-lostcat/missing-cat-poster.png"
-			},
-			{
-				"type": "dialog",
-				"text": "I decided to help her. 'Let's find Whiskers,' I said, grabbing my coat.",
-				"background": "res://assets/levels/002-lostcat/helping-hand.png"
-			},
-			{"type": "game"},
-			{
-				"type": "dialog",
-				"text":
-				"'You found him! Thank you so much!' Mrs. Johnson exclaimed as I returned with Whiskers.",
-				"background": "res://assets/levels/002-lostcat/found-cat.png"
-			}
-		]
-	},
-	{
-		"title": "The Secret Recipe",
-		"score_required": 100,
-		"steps":
-		[
-			{
-				"type": "dialog",
-				"text":
-				"The old, faded recipe book lay open on the kitchen table, but a page was missing.",
-				"background": "res://assets/levels/003-secretrecipe/recipe-book.png"
-			},
-			{
-				"type": "dialog",
-				"text":
-				"Aunt Maria looked worried. 'It's the secret family recipe for Bolognese sauce,' she sighed.",
-				"background": "res://assets/levels/003-secretrecipe/aunt-maria.png"
-			},
-			{
-				"type": "dialog",
-				"text":
-				"I noticed a torn piece of paper with scribbled letters. 'Maybe this is a clue,' I thought.",
-				"background": "res://assets/levels/003-secretrecipe/clue.png"
-			},
-			{"type": "game"},
-			{
-				"type": "dialog",
-				"text": "'You did it! You've decrypted the recipe!' Aunt Maria exclaimed with joy.",
-				"background": "res://assets/levels/003-secretrecipe/success.png"
-			}
-		]
-	}
+
 ]
