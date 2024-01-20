@@ -85,6 +85,10 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 			if GameState.score >= Story.get_required_score():
 				# TODO play animation
 				get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+	else:
+		# Shake the field
+		var animation_player = get_node("%FieldAnimationPlayer")
+		animation_player.play("shake_field")
 	
 	var preview_field = get_node("%PreviewTileMap")
 	preview_field.clear()
@@ -111,7 +115,7 @@ func do_block_removal_animation(removed_blocks):
 		var pos = block["pos"]
 		var tile_id = block["tile_id"]
 		field.set_cellv(pos, tile_id)
-	var animation_player = get_node("%ClearingShapesAnimationPlayer")
+	var animation_player = get_node("%FieldAnimationPlayer")
 	animation_player.play("blink")
 	
 func _on_HUD_settings_pressed():
