@@ -53,6 +53,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false, true, false, true, false, true, false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/Field/TileMaps/FieldTileMap:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.1, 0.133333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 30 ), Vector2( 0, -20 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/Field/TileMaps/BackgroundTileMap:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.1, 0.133333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 30 ), Vector2( 0, -20 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "shake_field"
@@ -202,6 +226,7 @@ anims/blink = SubResource( 2 )
 anims/shake_field = SubResource( 3 )
 
 [node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
+unique_name_in_owner = true
 position = Vector2( 56, 140 )
 scale = Vector2( 0.24, 0.24 )
 
