@@ -61,9 +61,10 @@ func _on_CurrentShape_drag(positions, tile_ids):
 			can_be_placed = false
 			continue
 
+	preview_field.visible = can_be_placed
 	var current_shape_container = get_node("%CurrentShape")
 	current_shape_container.can_be_placed = can_be_placed
-	current_shape_container.visible = not shape_covers_preview
+	current_shape_container.visible = not can_be_placed
 
 
 func _on_CurrentShape_place(block_positions, tile_ids):
