@@ -303,6 +303,15 @@ margin_top = -31.0
 margin_right = 303.0
 margin_bottom = -7.0
 
+[node name="NextShapeTileMap" type="TileMap" parent="VBoxContainer/ShapesSource"]
+unique_name_in_owner = true
+position = Vector2( 36, 32 )
+scale = Vector2( 0.1, 0.1 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 65535, 1, 0, 0, 1, 0, 131071, 1, 0, 65536, 1, 0 )
+
 [node name="Shapes" type="Node" parent="."]
 unique_name_in_owner = true
 

@@ -10,11 +10,13 @@ var pending_tile_removals = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	init_field()
 	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
+	var next_shape_tilemap = get_node("%NextShapeTileMap")
 	if GameState.is_free_play:
-		GameState.load_game_free_play(field, current_shape.get_tilemap())
+		GameState.load_game_free_play(field, current_shape.get_tilemap(), next_shape_tilemap)
 	current_shape.center()
 	
 func init_field():
@@ -29,13 +31,15 @@ func new_game():
 	init_field()
 	var field = get_node("%FieldTileMap")
 	var tilemap = get_node("%CurrentShape").get_tilemap()
+	var next_shape_tilemap = get_node("%NextShapeTileMap")
 	if GameState.is_free_play:
-		GameState.save_game_free_play(field, tilemap)
+		GameState.save_game_free_play(field, tilemap, next_shape_tilemap)
 
 func randomize_shape():
 	var current_shape = get_node("%CurrentShape")
 	var possible_shapes = get_node("%Shapes").get_children()
-	current_shape.randomize(possible_shapes)
+	var next_shape_tilemap = get_node("%NextShapeTileMap")
+	current_shape.pick_next(possible_shapes, next_shape_tilemap)
 	if not shape_can_be_placed_anywhere(current_shape.get_tilemap()):
 		get_node("%GameOverDialog").show()
 
@@ -117,12 +121,13 @@ func prepare_next_shape():
 	# Randomize the next shape
 	var preview_field = get_node("%PreviewTileMap")
 	var current_shape = get_node("%CurrentShape")
+	var next_shape = get_node("%NextShapeTileMap")
 	var field = get_node("%FieldTileMap")
 	preview_field.clear()
 	randomize_shape()
 	current_shape.visible = true
 	if GameState.is_free_play:
-		GameState.save_game_free_play(field, current_shape.get_tilemap())
+		GameState.save_game_free_play(field, current_shape.get_tilemap(), next_shape)
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
