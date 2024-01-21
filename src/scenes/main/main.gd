@@ -2,6 +2,11 @@ extends Control
 
 var field_size = Vector2(8, 8)
 
+var tile_removal_scene = preload("res://scenes/main/tile_removal.tscn")
+
+var blocks_to_place = []
+var tile_ids_to_place = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_field()
@@ -68,14 +73,41 @@ func _on_CurrentShape_drag(positions, tile_ids):
 
 
 func _on_CurrentShape_place(block_positions, tile_ids):
+	blocks_to_place = block_positions
+	tile_ids_to_place = tile_ids
+	# Start shaking the field
+	var animation_player = get_node("%FieldAnimationPlayer")
+	animation_player.play("shake_field_with_anticipation")
+
+func _on_FieldAnimationPlayer_animation_finished(anim_name):
+	if anim_name == "shake_field_with_anticipation":
+		# Field shaking finished
+		# Make preview back to transparent
+		# TODO maybe use an animation?
+		var preview_field = get_node("%PreviewTileMap")
+		preview_field.modulate = Color(1, 1, 1, 0.5)
+		#get_node("%PlaceShapeParticles").emit(blocks_to_place)
+		place_shape_on_field()
+		remove_the_blocks_of_the_same_colors()
+		prepare_next_shape()
+
+func place_shape_on_field():
+	# Place the shape on the field
 	var field = get_node("%FieldTileMap")
-	for i in range(len(block_positions)):
-		var pos = block_positions[i]
-		var tile_id = tile_ids[i]
+	for i in range(len(blocks_to_place)):
+		var pos = blocks_to_place[i]
+		var tile_id = tile_ids_to_place[i]
 		# Get the tile from the field at this global position
 		var local_pos = field.to_local(pos)
 		var cell_pos = field.world_to_map(local_pos)
 		field.set_cellv(cell_pos, tile_id)
+	blocks_to_place = []
+	tile_ids_to_place = []
+
+func remove_the_blocks_of_the_same_colors():
+	# Remove the blocks of the same color
+	# TODO play removing animation
+	var field = get_node("%FieldTileMap")
 	var removed_blocks = field.remove_groups()
 	if len(removed_blocks) > 0:
 		do_block_removal_animation(removed_blocks)
@@ -85,15 +117,14 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 			if GameState.score >= Story.get_required_score():
 				# TODO play animation
 				get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
-	else:
-		# Shake the field
-		var animation_player = get_node("%FieldAnimationPlayer")
-		animation_player.play("shake_field")
-	
+
+func prepare_next_shape():
+	# Randomize the next shape
 	var preview_field = get_node("%PreviewTileMap")
+	var current_shape = get_node("%CurrentShape")
+	var field = get_node("%FieldTileMap")
 	preview_field.clear()
 	randomize_shape()
-	var current_shape = get_node("%CurrentShape")
 	current_shape.visible = true
 	if GameState.is_free_play:
 		GameState.save_game_free_play(field, current_shape.get_tilemap())
@@ -117,6 +148,17 @@ func do_block_removal_animation(removed_blocks):
 		field.set_cellv(pos, tile_id)
 	var animation_player = get_node("%FieldAnimationPlayer")
 	animation_player.play("blink")
+	# for block in removed_blocks:
+	# 	var pos = block["pos"]
+	# 	var tile_id = block["tile_id"]
+	# 	var field = get_node("%FieldTileMap")
+	# 	#var world_pos = field.map_to_world(pos)
+	# 	var world_pos = Vector2(20, 20)
+	# 	var block_to_score_path = block_to_score_path_scene.instance()
+	# 	block_to_score_path.position = world_pos
+	# 	block_to_score_path.end_position = get_node("%HUD").rect_position
+	# 	block_to_score_path.tile_id = tile_id
+	# 	add_child(block_to_score_path)
 	
 func _on_HUD_settings_pressed():
 	get_node("%SettingsDialog").show()

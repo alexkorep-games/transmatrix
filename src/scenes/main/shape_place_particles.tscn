@@ -4,14 +4,25 @@
 [ext_resource path="res://scenes/main/shape_place_particles.gd" type="Script" id=2]
 
 [node name="PlaceShapeParticles" type="Node2D"]
-position = Vector2( -233.333, -583.333 )
-scale = Vector2( 4.16667, 4.16667 )
 script = ExtResource( 2 )
 
 [node name="Particles01" parent="." groups=["emitters"] instance=ExtResource( 1 )]
+position = Vector2( 147, 283 )
+amount = 8
+initial_velocity = 308.54
+initial_velocity_random = 1.0
 
 [node name="Particles02" parent="." groups=["emitters"] instance=ExtResource( 1 )]
+amount = 8
+initial_velocity = 308.54
+initial_velocity_random = 1.0
 
 [node name="Particles03" parent="." groups=["emitters"] instance=ExtResource( 1 )]
+amount = 8
+initial_velocity = 308.54
+initial_velocity_random = 1.0
 
 [node name="Particles04" parent="." groups=["emitters"] instance=ExtResource( 1 )]
+amount = 8
+initial_velocity = 308.54
+initial_velocity_random = 1.0

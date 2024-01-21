@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/settings_dialog/settings_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://assets/ui/communicator.png" type="Texture" id=9]
+[ext_resource path="res://scenes/main/shape_place_particles.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -105,6 +106,47 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 30 ), Vector2( 0, -20 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shake_field_with_anticipation"
+length = 0.233333
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.133333, 0.166667, 0.2, 0.233333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 15 ), Vector2( 0, -10 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/Field/TileMaps/PreviewTileMap:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.0666667, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -50 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/Field/TileMaps/PreviewTileMap:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="TileSet" id=1]
@@ -224,6 +266,7 @@ root_node = NodePath("../../..")
 anims/RESET = SubResource( 4 )
 anims/blink = SubResource( 2 )
 anims/shake_field = SubResource( 3 )
+anims/shake_field_with_anticipation = SubResource( 5 )
 
 [node name="TileMaps" type="Node2D" parent="VBoxContainer/Field"]
 unique_name_in_owner = true
@@ -255,10 +298,12 @@ script = ExtResource( 5 )
 
 [node name="PreviewTileMap" type="TileMap" parent="VBoxContainer/Field/TileMaps"]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.498039 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
+
+[node name="PlaceShapeParticles" parent="VBoxContainer" instance=ExtResource( 10 )]
+unique_name_in_owner = true
 
 [node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true
@@ -374,6 +419,7 @@ theme = ExtResource( 8 )
 window_title = "Game Over"
 dialog_text = "Game Over"
 
+[connection signal="animation_finished" from="VBoxContainer/Field/FieldAnimationPlayer" to="." method="_on_FieldAnimationPlayer_animation_finished"]
 [connection signal="settings_pressed" from="VBoxContainer/HUD" to="." method="_on_HUD_settings_pressed"]
 [connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
 [connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
