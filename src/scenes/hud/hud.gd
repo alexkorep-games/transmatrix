@@ -5,10 +5,7 @@ signal settings_pressed
 export var show_progress = false
 
 func _ready():
-	var windowHeight = OS.get_real_window_size().y
-	var safeAreaTop = OS.get_window_safe_area().position.y
-	var normalizedPosition = safeAreaTop / windowHeight * 720
-	rect_position.y = normalizedPosition
+	pass
 
 func _process(_delta):
 	var progress_bar = get_node("%ProgressBar")
