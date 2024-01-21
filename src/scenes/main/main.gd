@@ -6,6 +6,7 @@ var tile_removal_scene = preload("res://scenes/main/tile_removal.tscn")
 
 var blocks_to_place = []
 var tile_ids_to_place = []
+var pending_tile_removals = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -111,12 +112,6 @@ func remove_the_blocks_of_the_same_colors():
 	var removed_blocks = field.remove_groups()
 	if len(removed_blocks) > 0:
 		do_block_removal_animation(removed_blocks)
-		var score = len(removed_blocks)
-		GameState.increase_score(score)
-		if not GameState.is_free_play:
-			if GameState.score >= Story.get_required_score():
-				# TODO play animation
-				get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
 
 func prepare_next_shape():
 	# Randomize the next shape
@@ -140,25 +135,42 @@ func shape_can_be_placed_anywhere(current_shape_tilemap):
 	return EndGameChecker.has_more_moves(field, shape_blocks, field_size.x, field_size.y)
 
 func do_block_removal_animation(removed_blocks):
-	var field = get_node("%ClearingShapesFieldTileMap")
-	field.clear()
+	var field = get_node("%FieldTileMap")
+
+	# Build the tile removal animations
 	for block in removed_blocks:
-		var pos = block["pos"]
+		# Restore the removed blocks, so that they can be removed with the animation
 		var tile_id = block["tile_id"]
+		var pos = block["pos"]
 		field.set_cellv(pos, tile_id)
-	var animation_player = get_node("%FieldAnimationPlayer")
-	animation_player.play("blink")
-	# for block in removed_blocks:
-	# 	var pos = block["pos"]
-	# 	var tile_id = block["tile_id"]
-	# 	var field = get_node("%FieldTileMap")
-	# 	#var world_pos = field.map_to_world(pos)
-	# 	var world_pos = Vector2(20, 20)
-	# 	var block_to_score_path = block_to_score_path_scene.instance()
-	# 	block_to_score_path.position = world_pos
-	# 	block_to_score_path.end_position = get_node("%HUD").rect_position
-	# 	block_to_score_path.tile_id = tile_id
-	# 	add_child(block_to_score_path)
+
+		var tile_removal = tile_removal_scene.instance()
+		tile_removal.tile_position = pos
+		tile_removal.tile_id = tile_id
+		tile_removal.connect("finished", self, "_on_TileRemoval_finished")
+		pending_tile_removals.append(tile_removal)
+	# Start it for the fist tile
+	start_tile_removal_animation()
+
+func start_tile_removal_animation():
+	var field = get_node("%FieldTileMap")
+	var tilemaps = get_node("%TileMaps")
+	# Start the tile remove animation
+	var tile_removal = pending_tile_removals.pop_front()
+	if tile_removal:
+		tilemaps.add_child(tile_removal)
+		# Actually clear the field block
+		field.set_cellv(tile_removal.tile_position, -1)
+
+func _on_TileRemoval_finished():
+	# animate scrore increase
+	GameState.increase_score(1)
+	if not GameState.is_free_play:
+		if GameState.score >= Story.get_required_score():
+			# TODO play animation
+			get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+	# Animate the next tile removel
+	start_tile_removal_animation()
 	
 func _on_HUD_settings_pressed():
 	get_node("%SettingsDialog").show()
