@@ -78,10 +78,10 @@ func _on_CurrentShape_place(block_positions, tile_ids):
 	tile_ids_to_place = tile_ids
 	# Start shaking the field
 	var animation_player = get_node("%FieldAnimationPlayer")
-	animation_player.play("shake_field_with_anticipation")
+	animation_player.play("shake_shape")
 
 func _on_FieldAnimationPlayer_animation_finished(anim_name):
-	if anim_name == "shake_field_with_anticipation":
+	if anim_name == "shake_shape":
 		# Field shaking finished
 		# Make preview back to transparent
 		# TODO maybe use an animation?
