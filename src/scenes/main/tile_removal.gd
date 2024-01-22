@@ -4,7 +4,7 @@ extends Node2D
 export var tile_id := 0
 export var tile_position := Vector2.ZERO
 
-signal finished
+signal finished(tile_id)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,5 +13,5 @@ func _ready():
 	get_node("%AnimationPlayer").play("remove_block")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	emit_signal("finished")
+	emit_signal("finished", tile_id)
 	queue_free()

@@ -22,7 +22,7 @@ func reset_score():
 	score = 0
 
 
-func save_game_free_play(field_tile_map, current_shape_tile_map, next_shape_tile_map):
+func save_game_free_play(field_tile_map, current_shape_tile_map):
 	var file := File.new()
 	file.open(SAVE_GAME_FILE, File.WRITE)
 	# Save the field and current shape tile maps
@@ -46,17 +46,11 @@ func save_game_free_play(field_tile_map, current_shape_tile_map, next_shape_tile
 			"tile": current_shape_tile_map.get_cellv(cell)
 		})
 
-	for cell in next_shape_tile_map.get_used_cells():
-		result["next_shape"].append({
-			"cell": cell,
-			"tile": next_shape_tile_map.get_cellv(cell)
-		})
-
 	file.store_var(result)
 	file.close()
 
 
-func load_game_free_play(field_tile_map, current_shape_tile_map, next_shape_tile_map):
+func load_game_free_play(field_tile_map, current_shape_tile_map):
 	var file := File.new()
 	if file.file_exists(SAVE_GAME_FILE):
 		file.open(SAVE_GAME_FILE, File.READ)
@@ -74,9 +68,4 @@ func load_game_free_play(field_tile_map, current_shape_tile_map, next_shape_tile
 				for cell in state["current_shape"]:
 					current_shape_tile_map.set_cellv(cell.cell, cell.tile)
 			
-			if "next_shape" in state:
-				next_shape_tile_map.clear()
-				for cell in state["next_shape"]:
-					next_shape_tile_map.set_cellv(cell.cell, cell.tile)
-
 		file.close()
