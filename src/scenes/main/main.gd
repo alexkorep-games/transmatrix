@@ -12,10 +12,8 @@ var pending_tile_removals = []
 func _ready():
 	randomize()
 	init_field()
-	var field = get_node("%FieldTileMap")
 	var current_shape = get_node("%CurrentShape")
-	if GameState.is_free_play:
-		GameState.load_game_free_play(field, current_shape.get_tilemap())
+	load_game_free_play()
 	current_shape.center()
 	
 func init_field():
@@ -28,10 +26,6 @@ func init_field():
 
 func new_game():
 	init_field()
-	var field = get_node("%FieldTileMap")
-	var tilemap = get_node("%CurrentShape").get_tilemap()
-	if GameState.is_free_play:
-		GameState.save_game_free_play(field, tilemap)
 
 func generate_next_shape():
 	var shape_emitter = get_node("%ShapeEmitter")
@@ -94,6 +88,8 @@ func _on_FieldAnimationPlayer_animation_finished(anim_name):
 		place_shape_on_field()
 		remove_the_blocks_of_the_same_colors()
 		prepare_next_shape()
+		# Save it here, and also when tiles removal animation is finished
+		save_game_free_play()
 
 func place_shape_on_field():
 	# Place the shape on the field
@@ -120,13 +116,9 @@ func prepare_next_shape():
 	# Randomize the next shape
 	var preview_field = get_node("%PreviewTileMap")
 	var current_shape = get_node("%CurrentShape")
-	var next_shape = get_node("%NextShapeTileMap")
-	var field = get_node("%FieldTileMap")
 	preview_field.clear()
 	generate_next_shape()
 	current_shape.visible = true
-	if GameState.is_free_play:
-		GameState.save_game_free_play(field, current_shape.get_tilemap())
 
 func _on_CurrentShape_drag_release():
 	var preview_field = get_node("%PreviewTileMap")
@@ -165,6 +157,12 @@ func start_tile_removal_animation():
 		tilemaps.add_child(tile_removal)
 		# Actually clear the field block
 		field.set_cellv(tile_removal.tile_position, -1)
+	else:
+		# All tile removed, let's save the game state
+		# We also do it after preparing the next shape
+		save_game_free_play()
+		# TODO also do prepare_next_shape() here
+		# if there are some shapes are removed
 
 func _on_TileRemoval_finished(tile_id):
 	# animate scrore increase
@@ -190,9 +188,46 @@ func _on_SettingsDialog_new_game():
 func _on_ConfirmationDialog_confirmed():
 	new_game()
 
-# func _on_PasswordLabel_password_cracked():
-# 	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
-
 
 func _on_CheatButton_pressed():
 	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
+
+
+func save_tilemap(tilemap, state, field_name):
+	state[field_name] = []
+	for cell in tilemap.get_used_cells():
+		state[field_name].append({
+			"cell": cell,
+			"tile": tilemap.get_cellv(cell)
+		})
+	
+func load_tilemap(state, tilemap, field_name):
+	if field_name in state:
+		tilemap.clear()
+		for cell in state[field_name]:
+			tilemap.set_cellv(cell["cell"], cell["tile"])
+
+func save_game_free_play():
+	if not GameState.is_free_play:
+		return
+	var field = get_node("%FieldTileMap")
+	var tilemap = get_node("%CurrentShape").get_tilemap()
+	var shape_emitter = get_node("%ShapeEmitter")
+	var state = {}
+	save_tilemap(field, state, "field")
+	save_tilemap(tilemap, state, "current_shape")
+	shape_emitter.save(state)
+	GameState.save_game_free_play(state)
+
+func load_game_free_play():
+	if not GameState.is_free_play:
+		return
+	var field = get_node("%FieldTileMap")
+	var tilemap = get_node("%CurrentShape").get_tilemap()
+	var shape_emitter = get_node("%ShapeEmitter")
+	var state = GameState.load_game_free_play()
+	if not state:
+		return
+	load_tilemap(state, field, "field")
+	load_tilemap(state, tilemap, "current_shape")
+	shape_emitter.load(state)
