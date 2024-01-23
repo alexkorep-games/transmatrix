@@ -19,10 +19,11 @@ func _ready():
 
 func add_stock(tile_id, qty):
 	stock_tiles[tile_id] += qty
-	# If we have more than 4 of this tile, they are merged to the next color
-	while stock_tiles[tile_id] >= 4:
-		stock_tiles[tile_id] -= 4
-		if tile_id < len(stock_tiles) - 1:
+	# If we have more than 4 of this tile, they are merged to the next color.
+	# Except for the last one.
+	if tile_id < len(stock_tiles) - 1:
+		while stock_tiles[tile_id] >= 4:
+			stock_tiles[tile_id] -= 4
 			add_stock(tile_id + 1, 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,14 +37,16 @@ func _process(delta):
 		labels[x].set_text(str(qty) if qty > 0 else "")
 
 func pick_random_tile_id():
-	var i = len(stock_tiles) - 1
-	while i > 0:
-		if stock_tiles[i] > 0:
-			stock_tiles[i] -= 1
-			return i
-		i -= 1
-	# tile_id = 0 has infinite stock
-	return 0
+	# var i = len(stock_tiles) - 1
+	# while i > 0:
+	# 	if stock_tiles[i] > 0:
+	# 		stock_tiles[i] -= 1
+	# 		return i
+	# 	i -= 1
+	# # tile_id = 0 has infinite stock
+	# return 0
+	var tile_id = randi() % len(stock_tiles)
+	return tile_id
 
 func get_next_shape(destination_tilemaps):
 	var source_tilemaps = get_node("%Shapes").get_children()
@@ -61,10 +64,10 @@ func get_next_shape(destination_tilemaps):
 			destination_tilemaps.set_cell(cell_x, cell_y, new_tile_id)
 
 func save(state_dict):
-	state_dict["shape_emitter"] = {
+	state_dict["shapes_stock"] = {
 		"stock_tiles": stock_tiles
 	}
 
 func load(state_dict):
-	if "shape_emitter" in state_dict:
-		stock_tiles = state_dict["shape_emitter"]["stock_tiles"]
+	if "shapes_stock" in state_dict:
+		stock_tiles = state_dict["shapes_stock"]["stock_tiles"]

@@ -9,7 +9,7 @@
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://assets/ui/communicator.png" type="Texture" id=9]
 [ext_resource path="res://scenes/main/shape_place_particles.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/shape_emitter/shape_emitter.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/shapes_stock/shapes_stock.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -303,7 +303,7 @@ margin_top = -31.0
 margin_right = 303.0
 margin_bottom = -7.0
 
-[node name="ShapeEmitter" parent="VBoxContainer" instance=ExtResource( 11 )]
+[node name="ShapesStock" parent="VBoxContainer" instance=ExtResource( 11 )]
 unique_name_in_owner = true
 position = Vector2( 199, 85 )
 

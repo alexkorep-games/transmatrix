@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/shape_emitter/shape_emitter.gd" type="Script" id=1]
+[ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/grid/grid01.png" type="Texture" id=2]
-[ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/shapes_stock/shapes_stock.gd" type="Script" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
@@ -90,8 +90,8 @@
 5/shapes = [  ]
 5/z_index = 0
 
-[node name="ShapeEmitter" type="Node2D"]
-script = ExtResource( 1 )
+[node name="ShapesStock" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
@@ -141,49 +141,49 @@ unique_name_in_owner = true
 
 [node name="I" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0 )
 
 [node name="O" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, 65535, 0, 0, 0, 0, 0 )
 
 [node name="T" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 0, 0, 0 )
 
 [node name="S" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, 65535, 0, 0, 0, 0, 0 )
 
 [node name="Z" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, 0, 0, 0, 1, 0, 0 )
 
 [node name="J" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, 1, 0, 0 )
 
 [node name="L" type="TileMap" parent="Shapes"]
 visible = false
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -65535, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0 )

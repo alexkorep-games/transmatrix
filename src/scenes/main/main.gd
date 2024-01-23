@@ -28,10 +28,10 @@ func new_game():
 	init_field()
 
 func generate_next_shape():
-	var shape_emitter = get_node("%ShapeEmitter")
+	var shapes_stock = get_node("%ShapesStock")
 	var current_shape = get_node("%CurrentShape")
 	var current_shape_tilemap = current_shape.get_tilemap()
-	shape_emitter.get_next_shape(current_shape_tilemap)
+	shapes_stock.get_next_shape(current_shape_tilemap)
 	current_shape.center()
 	if not shape_can_be_placed_anywhere(current_shape_tilemap):
 		get_node("%GameOverDialog").show()
@@ -167,8 +167,8 @@ func start_tile_removal_animation():
 func _on_TileRemoval_finished(tile_id):
 	# animate scrore increase
 	GameState.increase_score(1)
-	var shape_emitter = get_node("%ShapeEmitter")
-	shape_emitter.add_stock(tile_id, 1)
+	var shapes_stock = get_node("%ShapesStock")
+	shapes_stock.add_stock(tile_id, 1)
 	if not GameState.is_free_play:
 		if GameState.score >= Story.get_required_score():
 			# TODO play animation
@@ -212,11 +212,11 @@ func save_game_free_play():
 		return
 	var field = get_node("%FieldTileMap")
 	var tilemap = get_node("%CurrentShape").get_tilemap()
-	var shape_emitter = get_node("%ShapeEmitter")
+	var shapes_stock = get_node("%ShapesStock")
 	var state = {}
 	save_tilemap(field, state, "field")
 	save_tilemap(tilemap, state, "current_shape")
-	shape_emitter.save(state)
+	shapes_stock.save(state)
 	GameState.save_game_free_play(state)
 
 func load_game_free_play():
@@ -224,10 +224,10 @@ func load_game_free_play():
 		return
 	var field = get_node("%FieldTileMap")
 	var tilemap = get_node("%CurrentShape").get_tilemap()
-	var shape_emitter = get_node("%ShapeEmitter")
+	var shapes_stock = get_node("%ShapesStock")
 	var state = GameState.load_game_free_play()
 	if not state:
 		return
 	load_tilemap(state, field, "field")
 	load_tilemap(state, tilemap, "current_shape")
-	shape_emitter.load(state)
+	shapes_stock.load(state)
