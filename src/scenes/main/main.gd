@@ -231,3 +231,7 @@ func load_game_free_play():
 	load_tilemap(state, field, "field")
 	load_tilemap(state, tilemap, "current_shape")
 	shapes_stock.load(state)
+
+func _on_ShopButton_pressed():
+	#get_node("%Shop").show()
+	pass
