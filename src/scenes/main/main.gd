@@ -188,10 +188,3 @@ func _on_SettingsDialog_new_game():
 
 func _on_ConfirmationDialog_confirmed():
 	new_game()
-
-# func _on_PasswordLabel_password_cracked():
-# 	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
-
-
-func _on_CheatButton_pressed():
-	get_tree().change_scene("res://scenes/story_dialog/story_dialog.tscn")
