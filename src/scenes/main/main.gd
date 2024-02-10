@@ -28,11 +28,7 @@ func new_game():
 	init_field()
 
 func generate_next_shape():
-	var shapes_stock = get_node("%ShapesStock")
-	var current_shape = get_node("%CurrentShape")
-	var current_shape_tilemap = current_shape.get_tilemap()
-	shapes_stock.get_next_shape(current_shape_tilemap)
-	current_shape.center()
+	get_node("%ShapesSource").generate_next_shape()
 	if not shape_can_be_placed_anywhere(current_shape_tilemap):
 		get_node("%GameOverDialog").show()
 
@@ -84,7 +80,6 @@ func _on_FieldAnimationPlayer_animation_finished(anim_name):
 		# TODO maybe use an animation?
 		var preview_field = get_node("%PreviewTileMap")
 		preview_field.modulate = Color(1, 1, 1, 0.5)
-		#get_node("%PlaceShapeParticles").emit(blocks_to_place)
 		place_shape_on_field()
 		remove_the_blocks_of_the_same_colors()
 		prepare_next_shape()

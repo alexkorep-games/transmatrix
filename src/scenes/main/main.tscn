@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/shop/shop.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/current_shape/current_shape.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/shapes_source/shapes_source.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/grid/grid01.png" type="Texture" id=3]
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=4]
 [ext_resource path="res://scenes/main/field_tile_map.gd" type="Script" id=5]
@@ -9,11 +9,7 @@
 [ext_resource path="res://scenes/settings_dialog/settings_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=8]
 [ext_resource path="res://assets/ui/communicator.png" type="Texture" id=9]
-[ext_resource path="res://scenes/main/shape_place_particles.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/shapes_stock/shapes_stock.tscn" type="PackedScene" id=11]
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=12]
-[ext_resource path="res://assets/ui/shop_button.png" type="Texture" id=13]
-[ext_resource path="res://assets/ui/shop_button_pressed.png" type="Texture" id=14]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -215,50 +211,17 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
-[node name="ShopButton" type="TextureButton" parent="VBoxContainer/Field"]
-margin_left = 56.0
-margin_top = 85.0
-margin_right = 199.0
-margin_bottom = 229.0
-rect_min_size = Vector2( 32, 32 )
-rect_scale = Vector2( 0.2, 0.2 )
-size_flags_vertical = 4
-toggle_mode = true
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 14 )
-stretch_mode = 5
-
-[node name="PlaceShapeParticles" parent="VBoxContainer" instance=ExtResource( 10 )]
-unique_name_in_owner = true
-
 [node name="HUD" parent="VBoxContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true
 margin_top = 451.0
 margin_bottom = 501.0
 
-[node name="ShapesSource" type="Control" parent="VBoxContainer"]
-margin_left = 30.0
-margin_top = 495.0
-margin_right = 327.0
-margin_bottom = 675.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CurrentShape" parent="VBoxContainer/ShapesSource" instance=ExtResource( 2 )]
+[node name="ShapesSource" parent="VBoxContainer" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-position = Vector2( 178, 94 )
-drag_offset = Vector2( 0, -130 )
-drag_scale = Vector2( 2, 2 )
-
-[node name="CheatButton" type="Button" parent="VBoxContainer/ShapesSource"]
-margin_left = 282.0
-margin_top = -31.0
-margin_right = 303.0
-margin_bottom = -7.0
-
-[node name="ShapesStock" parent="VBoxContainer" instance=ExtResource( 11 )]
-unique_name_in_owner = true
-position = Vector2( 199, 85 )
+margin_left = 29.0
+margin_top = 501.0
+margin_right = 329.0
+margin_bottom = 681.0
 
 [node name="StartNewGameConfirmationDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
@@ -300,19 +263,9 @@ dialog_text = "Game Over"
 
 [node name="Shop" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true
-visible = false
-margin_left = 30.0
-margin_top = 139.0
-margin_right = -30.0
-margin_bottom = -181.0
 
 [connection signal="animation_finished" from="VBoxContainer/Field/FieldAnimationPlayer" to="." method="_on_FieldAnimationPlayer_animation_finished"]
-[connection signal="pressed" from="VBoxContainer/Field/ShopButton" to="." method="_on_ShopButton_pressed"]
 [connection signal="settings_pressed" from="VBoxContainer/HUD" to="." method="_on_HUD_settings_pressed"]
-[connection signal="drag" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag"]
-[connection signal="drag_release" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_drag_release"]
-[connection signal="place" from="VBoxContainer/ShapesSource/CurrentShape" to="." method="_on_CurrentShape_place"]
-[connection signal="pressed" from="VBoxContainer/ShapesSource/CheatButton" to="." method="_on_CheatButton_pressed"]
 [connection signal="confirmed" from="StartNewGameConfirmationDialog" to="." method="_on_StartNewGameConfirmationDialog_confirmed"]
 [connection signal="new_game" from="SettingsDialog" to="." method="_on_SettingsDialog_new_game"]
 [connection signal="confirmed" from="GameOverDialog" to="." method="_on_ConfirmationDialog_confirmed"]

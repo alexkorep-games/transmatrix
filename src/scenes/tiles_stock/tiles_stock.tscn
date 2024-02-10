@@ -2,7 +2,7 @@
 
 [ext_resource path="res://resources/blocks_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/grid/grid01.png" type="Texture" id=2]
-[ext_resource path="res://scenes/shapes_stock/shapes_stock.gd" type="Script" id=3]
+[ext_resource path="res://scenes/tiles_stock/tiles_stock.gd" type="Script" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grid01.png 0"
